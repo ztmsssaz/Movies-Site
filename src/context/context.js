@@ -6,6 +6,7 @@ const AuthDispatchContext = React.createContext();
 
 export function useAuthState() {
     const context = React.useContext(AuthStateContext);
+    // eslint-disable-next-line eqeqeq
     if (context == 'undefined') {
         throw new Error('Error');
     }

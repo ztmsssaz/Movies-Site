@@ -8,6 +8,8 @@ const theme = {
     badgeColor: '#ff0000'
 }
 const Style = styled.div`
-
+.kljahsc{
+    color: ${theme.black}
+}
 `
 export default Style;

@@ -26,7 +26,6 @@ function Login() {
         e.preventDefault();
         try {
             let response = await loginUser(dispatch, { username, password, 'request_token': requestToken });
-            console.log(response);
             if (!response.success) {
                 return;
             }

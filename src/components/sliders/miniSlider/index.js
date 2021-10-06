@@ -5,7 +5,6 @@ import React, { Fragment } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, {
     Navigation,
-    Pagination,
     EffectFade,
     EffectCoverflow,
     EffectCube,
@@ -16,7 +15,6 @@ SwiperCore.use([
     EffectCube,
     EffectFade,
     Navigation,
-    Pagination,
 ]);
 
 export default function MiniSlider(props) {
@@ -29,7 +27,8 @@ export default function MiniSlider(props) {
                 return (
                     <SwiperSlide key={index}>
                         <div>
-                            <img className="img" src={item} alt="myimage" />
+                            <img src={item} alt="myimage" />
+                            <h2 className="text-center">{index}</h2>
                         </div>
                     </SwiperSlide>
                 )
@@ -42,36 +41,40 @@ export default function MiniSlider(props) {
                 <Swiper
                     spaceBetween={5}
                     initialSlide={0}
-                    navigation={{
-                        nextEl: '.next',
-                        prevEl: '.prev'
-                    }}
+                    navigation={true}
+                    speed={800}
                     breakpoints={{
-                        1024: {
+                        1920: {
                             slidesPerView: 9,
+                            slidesPerGroup: 9
+                        },
+                        1024: {
+                            slidesPerView: 7,
+                            slidesPerGroup: 7
                         },
                         768: {
                             slidesPerView: 6,
+                            slidesPerGroup: 6
                         },
                         640: {
                             slidesPerView: 5,
+                            slidesPerGroup: 5
                         },
                         480: {
                             slidesPerView: 3,
-                        },
-                        320: {
-                            slidesPerView: 2.5,
+                            slidesPerGroup: 3
                         },
                         0: {
-                            slidesPerView: 2,
+                            slidesPerView: 2.1,
+                            slidesPerGroup: 2.1
                         }
                     }}
                 >
                     {renderFarm()}
                 </Swiper>
-                <div className="prev bg-danger text-white" >prev</div>
-                <div className="next bg-dark text-white" >next</div>
+                {/* <div className="prev bg-danger text-white" >prev</div>
+                <div className="next bg-dark text-white" >next</div> */}
             </Style>
-        </Fragment>
+        </Fragment >
     );
 };

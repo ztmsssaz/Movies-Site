@@ -10,11 +10,9 @@ const theme = {
 }
 const Style = styled.div`
 header.mainHeader{
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: absolute;
     width: 100%;
-    z-index: 9;
+    z-index:100;
     .logo{
         max-width:90px;
         padding:5px 15px;

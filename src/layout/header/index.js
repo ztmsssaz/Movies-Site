@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import { isloggedIn } from "../../helpers/isLoggedIn";
+import { useAuthState } from "../../context";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Style from "./style";
 
 function Header() {
-    const userInfo = isloggedIn();
+    const authState = useAuthState();
     function handleLoginButton() {
-        if (!userInfo) {
+        if (!authState.sessionId) {
             return (
                 <div>
                     <Link className="auth-btn" to="/login">Login</Link>
@@ -24,7 +26,7 @@ function Header() {
             <header className="mainHeader">
                 <div className="container">
                     <div className="d-flex align-items-center justify-content-between">
-                        <div className="col-8 d-flex align-items-center">
+                        <div className="col-10 d-flex align-items-center">
                             <div className="logo">
                                 <Link to="/"><img src="images/logo.png" alt="logo" /></Link>
                             </div>
@@ -38,8 +40,11 @@ function Header() {
                                 </ul>
                             </nav>
                         </div>
-                        <div className="col-4 rtl">
+                        <div className="col-2 d-flex rtl">
                             {handleLoginButton()}
+                            <div className="px-4">
+                                <Link to="/search"><FontAwesomeIcon icon={faSearch} /></Link>
+                            </div>
                         </div>
                     </div>
                 </div>
