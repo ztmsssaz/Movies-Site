@@ -1,0 +1,37 @@
+@font-face {
+    font-family: 'karla';
+    src: url('../fonts/Karla-Regular.ttf') format('trueType'),
+    url('../fonts/Karla-Regular.woff') format('woff');
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'karla';
+    src: url('../fonts/Karla-Bold.ttf') format('trueType'),
+    url('../fonts/Karla-Bold.woff') format('woff');
+    font-weight: bold;
+}
+/* font RobotoSlab*/
+@font-face {
+    font-family: 'roboto-slab';
+    src: url('../fonts/RobotoSlab-Bold.ttf') format('trueType'),
+    url('../fonts/RobotoSlab-Bold.woff') format('woff');
+    font-weight: 900;
+}
+@font-face {
+    font-family: 'roboto-slab';
+    src: url('../fonts/RobotoSlab-Regular.ttf') format('trueType'),
+    url('../fonts/RobotoSlab-Regular.woff') format('woff');
+    font-weight: 700;
+}
+@font-face {
+    font-family: 'roboto-slab';
+    src: url('../fonts/RobotoSlab-Light.ttf') format('trueType'),
+    url('../fonts/RobotoSlab-Light.woff') format('woff');
+    font-weight: 500;
+}
+@font-face {
+    font-family: 'roboto-slab';
+    src: url('../fonts/RobotoSlab-Thin.ttf') format('trueType'),
+    url('../fonts/RobotoSlab-Thin.woff') format('woff');
+    font-weight: 300;
+}
