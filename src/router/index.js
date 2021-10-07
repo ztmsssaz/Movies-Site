@@ -4,6 +4,7 @@ import { PrivateRoute, PublicRoute } from "./config";
 import { isloggedIn } from '../helpers/isLoggedIn'
 import Loader from "../components/loader";
 import Layout from '../layout';
+import ProfileHeader from '../layout/profile-header'
 
 const Login = lazy(() => import("../pages/auth/login"));
 const Home = lazy(() => import("../pages/home"));
@@ -30,7 +31,8 @@ function MainRouter() {
                         <PublicRoute isLogin={isLogin} path="/login" restricted={true} exact>
                             <Login />
                         </PublicRoute>
-                        <PrivateRoute isLogin={isLogin} path="/user-profile" exact>
+                        <PrivateRoute isLogin={isLogin} path="/profile" exact>
+                            <ProfileHeader />
                             <UserProfile />
                         </PrivateRoute>
                     </Switch>

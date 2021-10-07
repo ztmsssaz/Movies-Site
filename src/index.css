@@ -21,3 +21,15 @@ ul{
   margin: 0;
   list-style: none;
 }
+a{
+  display: block;
+}
+.bg-image {
+  position: relative;
+  width: 100%;
+  background-position: center top;
+  background-size: cover;
+}
+.spacing{
+  padding-top: 88px;
+}

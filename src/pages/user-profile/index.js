@@ -1,9 +1,13 @@
-// import { Link } from "react-router-dom";
 import Style from "./style";
+
+
 function UserProfile() {
+
     return (
         <Style>
+            <div className>
 
+            </div>
         </Style>
     )
 }

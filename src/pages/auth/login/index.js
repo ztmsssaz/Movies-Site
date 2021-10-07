@@ -3,7 +3,7 @@ import { loginUser, useAuthDispatch } from "../../../context";
 import { useHistory } from "react-router-dom";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import api from '../../../api';
+import { getRequest } from '../../../api';
 
 import './style.css'
 function Login() {
@@ -15,7 +15,7 @@ function Login() {
     let history = useHistory();
     const dispatch = useAuthDispatch();
     useEffect(() => {
-        api.get('/token/new?api_key=4ba2c80bd43f2892ecb3349fa445015f')
+        getRequest('/authentication/token/new?api_key=4ba2c80bd43f2892ecb3349fa445015f')
             .then(response => {
                 if (response) {
                     setRequestToken(response.data.request_token);
@@ -25,7 +25,7 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            let response = await loginUser(dispatch, { username, password, 'request_token': requestToken });
+            const response = await loginUser(dispatch, { username, password, 'request_token': requestToken });
             if (!response.success) {
                 return;
             }

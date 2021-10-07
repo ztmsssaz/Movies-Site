@@ -4,6 +4,7 @@ import MainRouter from "./router";
 import './App.css';
 
 function App() {
+
   return (
     <Fragment>
       <AuthProvider>

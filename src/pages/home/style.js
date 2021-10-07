@@ -10,6 +10,9 @@ const Style = styled.div`
     max-width:1200px;
     padding-top:3rem;
     padding-bottom:3rem;
+    img{
+       border-radius:15px; 
+    }
 }
 .miniSlider{
     .prev, .next{
@@ -24,7 +27,6 @@ const Style = styled.div`
         left:0;
     }
 }
-
 
 }
 `

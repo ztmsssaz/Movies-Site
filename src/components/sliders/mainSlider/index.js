@@ -3,6 +3,7 @@ import 'swiper/swiper.min.css';
 import Style from "./style";
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { mediaBaseUrl } from '../../../constance';
 import SwiperCore, {
     Navigation,
     Pagination,
@@ -23,17 +24,20 @@ SwiperCore.use([
 ]);
 
 export default function MainSlider(props) {
-    const imgUrl = 'https://murmuring-tundra-31743.herokuapp.com/posters/t/p/w300_and_h450_bestv2/1UkbPQspPbq1FPbFP4VV1ELCfSN.jpg';
-    const array = [imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl]
-    // Now you can use Swiper
+    const { data } = props;
+    console.log(data);
+    const imageDefault = (el) => {
+        el.target.src = '/images/unkown-poster.jpg';
+        console.log(el.target.src);
+    }
     function renderFarm() {
         return (
-            array.map((item, index) => {
+            data.map((item, index) => {
                 return (
                     <SwiperSlide key={index}>
                         <div className="slideSize">
                             <Link to={`/see-movie/${index}`}>
-                                <img className="" src={item} alt="myimage" />
+                                <img src={`${mediaBaseUrl}${item.poster_path}`} onError={imageDefault} />
                             </Link>
                         </div>
                     </SwiperSlide>

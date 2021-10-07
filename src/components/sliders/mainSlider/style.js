@@ -6,6 +6,7 @@ const theme = {
 const Style = styled.div`
 .slideSize{
     max-width:270px;
+    margin: 0 auto;
 }
 .swiper-pagination{
     &-bullet{
