@@ -1,9 +1,12 @@
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 import Style from "./style";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import CircleProgressbar from '../../circle-gauges'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { mediaBaseUrl } from '../../../constance';
+import { posterBaseUrl } from '../../../constance';
+import Loading from '../../loading';
+
 import SwiperCore, {
     Navigation,
     Pagination,
@@ -20,12 +23,19 @@ SwiperCore.use([
     EffectFade,
     Navigation,
     Pagination,
-    Autoplay
+    Autoplay,
 ]);
-
 export default function MainSlider(props) {
     const { data } = props;
-    console.log(data);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (data.length) {
+            setLoading(false);
+        } else {
+            setLoading(true);
+        }
+    }, [props])
     const imageDefault = (el) => {
         el.target.src = '/images/unkown-poster.jpg';
         console.log(el.target.src);
@@ -34,10 +44,13 @@ export default function MainSlider(props) {
         return (
             data.map((item, index) => {
                 return (
-                    <SwiperSlide key={index}>
+                    <SwiperSlide key={item.id}>
                         <div className="slideSize">
-                            <Link to={`/see-movie/${index}`}>
-                                <img src={`${mediaBaseUrl}${item.poster_path}`} onError={imageDefault} />
+                            <Link className="position-relative" to={`/movie/${item.id}`}>
+                                <img src={`${posterBaseUrl}${item.poster_path}`} onError={imageDefault} alt={item.original_title} />
+                                <div className="mainSliderGauge">
+                                    <CircleProgressbar value={item.vote_average * 10} width={50} />
+                                </div>
                             </Link>
                         </div>
                     </SwiperSlide>
@@ -61,12 +74,14 @@ export default function MainSlider(props) {
                         slidesPerGroup: 4
                     },
                     320: {
-                        slidesPerView: 3,
-                        slidesPerGroup: 3
+                        slidesPerView: 2.2,
+                        slidesPerGroup: 2.2
                     }
                 }}
             >
                 {renderFarm()}
+                <Loading isLoading={loading} />
+                <div style={{ height: '70px' }}></div>
             </Swiper>
         </Style>
     );

@@ -1,35 +1,43 @@
+
+import React, { Fragment, useEffect } from 'react';
+import { Link } from 'react-router-dom'
+import CircleProgressbar from '../../circle-gauges';
+import { posterBaseUrl } from '../../../constance';
+import { textDots } from '../../../helpers/textDots'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, {
+    Navigation, EffectCube,
+} from "swiper";
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
 import Style from "./style";
-import React, { Fragment } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, {
-    Navigation,
-    EffectFade,
-    EffectCoverflow,
-    EffectCube,
-} from "swiper";
-
 SwiperCore.use([
-    EffectCoverflow,
     EffectCube,
-    EffectFade,
     Navigation,
 ]);
 
 export default function MiniSlider(props) {
-    const imgUrl = 'https://murmuring-tundra-31743.herokuapp.com/posters/t/p/w300_and_h450_bestv2/1UkbPQspPbq1FPbFP4VV1ELCfSN.jpg';
-    const array = [imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl, imgUrl]
-    // Now you can use Swiper
+    const { data = [] } = props;
+
+    useEffect(() => {
+
+    }, [props])
+
     function renderFarm() {
         return (
-            array.map((item, index) => {
+            data.map((item, index) => {
                 return (
-                    <SwiperSlide key={index}>
-                        <div>
-                            <img src={item} alt="myimage" />
-                            <h2 className="text-center">{index}</h2>
-                        </div>
+                    <SwiperSlide key={item.id}>
+                        <Link className="text-dark shadow-sm rounded-15 m-1" to={`/movie/${item.id}`}>
+                            <div className="position-relative">
+                                <img src={`${posterBaseUrl}${item.poster_path}`} alt={item.original_title} />
+                                <div className="miniSliderGauge">
+                                    <CircleProgressbar fontSize={32} value={item.vote_average * 10} width={40} />
+                                </div>
+                            </div>
+                            <h6 className="text-center px-1 pt-4 text-truncate" title={item.original_title}><b>{textDots(item.original_title, 15)}</b></h6>
+                            <div className="text-center pb-2">{item.release_date.split('-')[0]}</div>
+                        </Link>
                     </SwiperSlide>
                 )
             })
@@ -71,6 +79,7 @@ export default function MiniSlider(props) {
                     }}
                 >
                     {renderFarm()}
+                    <div style={{ height: '35px' }}></div>
                 </Swiper>
                 {/* <div className="prev bg-danger text-white" >prev</div>
                 <div className="next bg-dark text-white" >next</div> */}

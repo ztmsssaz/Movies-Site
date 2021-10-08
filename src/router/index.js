@@ -9,15 +9,15 @@ import ProfileHeader from '../layout/profile-header'
 const Login = lazy(() => import("../pages/auth/login"));
 const Home = lazy(() => import("../pages/home"));
 const AboutUS = lazy(() => import("../pages/about-us"));
-const SeeMovie = lazy(() => import("../pages/see-movie"));
+const SeeMovie = lazy(() => import("../pages/movie"));
 const UserProfile = lazy(() => import("../pages/user-profile"));
 
 function MainRouter() {
     const isLogin = isloggedIn();
     return (
         <BrowserRouter>
-            <Layout>
-                <Suspense fallback={<Loader />}>
+            <Suspense fallback={<Loader />}>
+                <Layout>
                     <Switch>
                         <PublicRoute isLogin={isLogin} path="/" exact>
                             <Home />
@@ -25,7 +25,7 @@ function MainRouter() {
                         <PublicRoute isLogin={isLogin} path="/about-us" exact>
                             <AboutUS />
                         </PublicRoute>
-                        <PublicRoute isLogin={isLogin} path="/see-movie/:id" exact>
+                        <PublicRoute isLogin={isLogin} path="/movie/:id" exact>
                             <SeeMovie />
                         </PublicRoute>
                         <PublicRoute isLogin={isLogin} path="/login" restricted={true} exact>
@@ -36,8 +36,8 @@ function MainRouter() {
                             <UserProfile />
                         </PrivateRoute>
                     </Switch>
-                </Suspense>
-            </Layout>
+                </Layout>
+            </Suspense>
         </BrowserRouter>
     )
 }

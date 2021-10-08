@@ -78,7 +78,14 @@ a{
   .ltr{
     direction:ltr;
   }
-
+.rounded{
+  &-15{
+    border-radius:15px;
+  }
+  &-10{
+    border-radius:15px;
+  }
+}
 .auth-btn{
     border-radius:20px;
     background-color: ${theme.primaryColor};

@@ -44,11 +44,14 @@ function Footer() {
                     <div className="text-center">
                         <div className="mt-4 border-bottom"></div>
                         <ul className="d-flex justify-content-center col-12 flex-wrap pt-4">
-                            <li className="col-1"><Link to="/"><FontAwesomeIcon icon={faInstagram} /></Link></li>
-                            <li className="col-1"><Link to="/"><FontAwesomeIcon icon={faTwitter} /></Link></li>
-                            <li className="col-1"><Link to="/"><FontAwesomeIcon icon={faLinkedin} /></Link></li>
-                            <li className="col-1"><Link to="/"><FontAwesomeIcon icon={faGithub} /></Link></li>
+                            <li className="col-1"><a href="https://instagram.com/ztmsssaz" rel="noreferrer follow" target="_blank"><FontAwesomeIcon icon={faInstagram} /></a></li>
+                            <li className="col-1"><a href="https://twitter.com/ztmsssaz" rel="noreferrer follow" target="_blank"><FontAwesomeIcon rel="noreferrer follow" icon={faTwitter} /></a></li>
+                            <li className="col-1"><a href="https://linkedin.com/ztmsssaz" rel="noreferrer follow" target="_blank"><FontAwesomeIcon rel="noreferrer follow" icon={faLinkedin} /></a></li>
+                            <li className="col-1"><a href="https://github.com/ztmsssaz" rel="noreferrer follow" target="_blank"><FontAwesomeIcon rel="noreferrer follow" icon={faGithub} /></a></li>
                         </ul>
+                    </div>
+                    <div className="text-center my-3">
+                        <a className="w-25 mx-auto" href="https://iamabolfazl.ir" rel="noreferrer follow" target="_blank"><small>By @ztmsssaz</small></a>
                     </div>
                 </div>
             </footer>

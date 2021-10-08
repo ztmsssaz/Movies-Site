@@ -5,7 +5,7 @@ function UserProfile() {
 
     return (
         <Style>
-            <div className>
+            <div>
 
             </div>
         </Style>

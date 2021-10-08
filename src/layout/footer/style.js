@@ -22,10 +22,10 @@ footer{
     ul{
         li a{
             padding:5px 0;
-            &:hover{
-                color:${theme.white}
-            }
         }
+    }
+    a:hover{
+        color:${theme.white}
     }
 }
 `
