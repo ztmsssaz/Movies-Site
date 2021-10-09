@@ -11,9 +11,11 @@ function Footer() {
             <footer className="py-4 px-3">
                 <div className="container">
                     <div className="d-flex justify-content-around flex-wrap text-center">
-                        <div className="footerLogo col-xs-6 mt-4">
-                            <img src="/footer-logo.svg" alt="footer logo" />
-                            <h6 className="text-light py-3">Hi {userInfo.name || userInfo.username} !</h6>
+                        <div className="col-6 col-sm-3 mt-4">
+                            <div className="footerLogo">
+                                <img src="/footer-logo.svg" alt="footer logo" />
+                                <h6 className="text-light py-3">Hi {userInfo.name || userInfo.username} !</h6>
+                            </div>
                         </div>
                         <div className="col-6 col-sm-3 mt-4">
                             <h5 className="text-uppercase"><b>THE BASICS</b></h5>

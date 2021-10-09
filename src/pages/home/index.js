@@ -1,7 +1,9 @@
-import { MiniSlider, MainSlider } from '../../components/sliders';
+import { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getRequest } from '../../api';
-import { Fragment, useEffect, useState } from 'react';
+import { MiniSlider, MainSlider } from '../../components/sliders';
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import get from 'lodash/get';
 import Style from "./style";
 
@@ -29,9 +31,9 @@ function Home() {
                 nowPlayingMovies,
                 upComingMovies,
             ] = await Promise.all([
-                (topRated = getRequest('/movie/top_rated')),
-                (nowPlayingMovies = getRequest('/movie/now_playing')),
-                (upComingMovies = getRequest('/movie/upcoming')),
+                (topRated = await getRequest('/movie/top_rated')),
+                (nowPlayingMovies = await getRequest('/movie/now_playing')),
+                (upComingMovies = await getRequest('/movie/upcoming')),
             ])
         } catch (err) {
             console.log(err);
@@ -47,21 +49,21 @@ function Home() {
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h3 className="py-2 text-capitalize"><b>Top Rated</b></h3>
-                        <Link className="px-5" to={`/categories/${1}`}>See More</Link>
+                        <Link className="px-2 px-sm-3" to={`/categories/${1}`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
                     </div>
                     <MiniSlider data={TOPRATED} />
                 </div>
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h3 className="py-2 text-capitalize"><b>Upcoming</b></h3>
-                        <Link className="px-5" to={`/categories/${1}`}>See More</Link>
+                        <Link className="px-2 px-sm-3" to={`/categories/${1}`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
                     </div>
                     <MiniSlider data={COMINGMOVIES} />
                 </div>
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h3 className="py-2 text-capitalize"><b>Now playing</b></h3>
-                        <Link className="px-5" to={`/categories/${1}`}>See More</Link>
+                        <Link className="px-2 px-sm-3" to={`/categories/${1}`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
                     </div>
                     <MiniSlider data={PLAYINGMOVIES} />
                 </div>

@@ -71,12 +71,17 @@ a{
   &:hover{
     color: ${theme.darkGray}
   }
+} h1,h2,h3,h4,h5,h6{
+  font-weight:bold;
 }
   .rtl{
     direction:rtl;
   }
   .ltr{
     direction:ltr;
+  }
+  .font-weight-normal{
+    font-weight:normal;
   }
 .rounded{
   &-15{

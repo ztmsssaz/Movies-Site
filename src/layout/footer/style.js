@@ -14,6 +14,7 @@ footer{
     .footerLogo{
         img{
             max-width:120px;
+            margin:0 auto;
         }
     }
     h5{

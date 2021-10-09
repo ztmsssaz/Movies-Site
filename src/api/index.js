@@ -15,7 +15,7 @@ import {
 const api = create({ baseURL: 'https://api.themoviedb.org/3/' });
 function errorHandling(response) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    if (response.status == 401) {
+    if (response.status === 401) {
         window.location.href = '/login';
     }
 }
