@@ -4,7 +4,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 function CircleProgressbar(props) {
-    const [value = 0] = useState(props.value);
+    const [value = 0] = useState(parseInt(props.value.toFixed(0)));
     const [strokColor, setStrokColor] = useState('0');
     const { fontSize = 26, width } = props;
 

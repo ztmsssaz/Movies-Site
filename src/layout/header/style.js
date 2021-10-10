@@ -15,6 +15,7 @@ header.mainHeader{
     position: absolute;
     width: 100%;
     z-index:100;
+    top:0;
     background-color: ${theme.background};
     .logo{
         width: 154px;

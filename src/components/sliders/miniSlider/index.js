@@ -1,9 +1,8 @@
-
 import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import CircleProgressbar from '../../circle-gauges';
 import { posterBaseUrl } from '../../../constance';
-import { textDots } from '../../../helpers/textDots'
+import { textDots } from '../../../helpers'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, {
     Navigation, EffectCube,
@@ -22,7 +21,9 @@ export default function MiniSlider(props) {
     useEffect(() => {
 
     }, [props])
-
+    function defaultImage(el) {
+        el.target.src = "/images/unkown-poster.jpg";
+    }
     function renderFarm() {
         return (
             data.map((item, index) => {
@@ -30,9 +31,9 @@ export default function MiniSlider(props) {
                     <SwiperSlide key={item.id}>
                         <Link className="text-dark shadow-sm rounded-15 m-1" to={`/movie/${item.id}`}>
                             <div className="position-relative">
-                                <img src={`${posterBaseUrl}${item.poster_path}`} alt={item.original_title} />
+                                <img src={`${posterBaseUrl}${item.poster_path}`} alt={item.original_title} onError={defaultImage} />
                                 <div className="miniSliderGauge">
-                                    <CircleProgressbar fontSize={32} value={item.vote_average * 10} width={40} />
+                                    <CircleProgressbar fontSize={32} value={(item.vote_average * 10)} width={40} />
                                 </div>
                             </div>
                             <h6 className="text-center px-1 pt-4 text-truncate" title={item.original_title}><b>{textDots(item.original_title, 15)}</b></h6>

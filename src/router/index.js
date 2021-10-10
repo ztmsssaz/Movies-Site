@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Switch } from "react-router-dom";
 import { PrivateRoute, PublicRoute } from "./config";
-import { isloggedIn } from '../helpers/isLoggedIn'
+import { isloggedIn } from '../helpers'
 import Loader from "../components/loader";
 import Layout from '../layout';
 import ProfileHeader from '../layout/profile-header'
@@ -11,6 +11,7 @@ const Home = lazy(() => import("../pages/home"));
 const AboutUS = lazy(() => import("../pages/about-us"));
 const SeeMovie = lazy(() => import("../pages/movie"));
 const UserProfile = lazy(() => import("../pages/user-profile"));
+const Search = lazy(() => import("../pages/search"));
 
 function MainRouter() {
     const isLogin = isloggedIn();
@@ -27,6 +28,9 @@ function MainRouter() {
                         </PublicRoute>
                         <PublicRoute isLogin={isLogin} path="/movie/:id" exact>
                             <SeeMovie />
+                        </PublicRoute>
+                        <PublicRoute isLogin={isLogin} path="/search/:keyword" exact>
+                            <Search />
                         </PublicRoute>
                         <PublicRoute isLogin={isLogin} path="/login" restricted={true} exact>
                             <Login />

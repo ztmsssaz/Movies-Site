@@ -12,6 +12,8 @@ function Home() {
     let [topRated, setTopRated] = useState([]);
     let [nowPlayingMovies, setPlayingMovies] = useState([]);
     let [upComingMovies, setComingMovies] = useState([]);
+    // search search
+    let [searchKeyword, setSearchKeyword] = useState('');
 
     const results = get(data, 'results', []);
     const PLAYINGMOVIES = get(nowPlayingMovies, 'results', []);
@@ -71,6 +73,9 @@ function Home() {
 
         )
     }
+    function search(el) {
+        setSearchKeyword(el.target.value);
+    }
     return (
         <Style>
             <section className="hero d-flex align-content-center align-items-center">
@@ -82,10 +87,13 @@ function Home() {
                         </div>
                         <div className="searchForm mx-auto">
                             <form name="search" className="position-relative mt-5">
-                                <input type="text" className="form-control py-2 rounded-pill" placeholder="Search for a movie, tv show, person......" />
-                                <button className="btn btn-primary py-2 rounded-pill">
-                                    Search
-                                </button>
+                                <input type="text" className="form-control py-2 rounded-pill" placeholder="Search for a movie, tv show, person......"
+                                    onKeyUp={search} />
+                                <Link to={`/search/${searchKeyword}`}>
+                                    <button type="submit" className="btn btn-primary py-2 rounded-pill">
+                                        Search
+                                    </button>
+                                </Link>
                             </form>
                         </div>
                     </div>

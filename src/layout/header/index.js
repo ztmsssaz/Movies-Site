@@ -21,7 +21,7 @@ function Header() {
                     </Link>
                     <ul className="dropdown-menu" aria-labelledby="dropdownProfile">
                         <li>
-                            <Link to="/Profile" className="dropdown-item border-bottom">
+                            <Link to="/profile" className="dropdown-item border-bottom">
                                 <h6><b>{authState.username}</b></h6>
                                 <span>View Profile</span>
                             </Link>
@@ -37,7 +37,7 @@ function Header() {
     }
     return (
         <Style>
-            <header className="mainHeader py-4">
+            <header className="mainHeader py-4 border-bottom">
                 <div className="container">
                     <div className="d-flex align-items-center justify-content-between">
                         <div className="col-10 d-flex align-items-center">
