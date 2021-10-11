@@ -164,7 +164,7 @@ function SeeMovie() {
                     {similarMovies_RenderFarm()}
                 </div>
 
-                <div className="modal fade rounded" id="seeGalleryImage" tabindex="-1" aria-labelledby="seeGalleryImageLabel" aria-hidden="true">
+                <div className="modal fade rounded" id="seeGalleryImage" tabIndex="-1" aria-labelledby="seeGalleryImageLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered modal-lg">
                         <div className="modal-content">
                             <div className="modal-header">

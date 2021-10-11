@@ -40,7 +40,6 @@ function CircleProgressbar(props) {
                 </div>
             </CircularProgressbar>
         </div>
-
     )
 }
 CircleProgressbar.propTypes = {

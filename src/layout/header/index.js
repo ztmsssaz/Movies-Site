@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
+import Searching from '../../components/searching'
 import { useAuthState } from "../../context";
-import DropSearch from '../../components/search';
 import Style from "./style";
 
 function Header() {
@@ -56,7 +56,7 @@ function Header() {
                         <div className="col-2 d-flex align-items-center rtl">
                             {handleLoginButton()}
                             <div className="px-4">
-                                <DropSearch />
+                                <Searching />
                             </div>
                         </div>
                     </div>
