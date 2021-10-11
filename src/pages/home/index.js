@@ -89,7 +89,7 @@ function Home() {
                             <form name="search" className="position-relative mt-5">
                                 <input type="text" className="form-control py-2 rounded-pill" placeholder="Search for a movie, tv show, person......"
                                     onKeyUp={search} />
-                                <Link to={`/search/${searchKeyword}`}>
+                                <Link to={`/search?query=${searchKeyword}`}>
                                     <button type="submit" className="btn btn-primary py-2 rounded-pill">
                                         Search
                                     </button>

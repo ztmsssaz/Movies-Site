@@ -103,6 +103,15 @@ a{
       color: ${theme.white}
     }
   }
+  .searchForm{
+    form[name="search"] {
+        button{
+            position:absolute;
+            right:0;
+            top:0;
+        }
+    }
+}
 `
 
 export default GlobalStyle;

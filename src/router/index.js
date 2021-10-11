@@ -12,6 +12,7 @@ const AboutUS = lazy(() => import("../pages/about-us"));
 const SeeMovie = lazy(() => import("../pages/movie"));
 const UserProfile = lazy(() => import("../pages/user-profile"));
 const Search = lazy(() => import("../pages/search"));
+const Categories = lazy(() => import("../pages/categories"));
 
 function MainRouter() {
     const isLogin = isloggedIn();
@@ -29,8 +30,11 @@ function MainRouter() {
                         <PublicRoute isLogin={isLogin} path="/movie/:id" exact>
                             <SeeMovie />
                         </PublicRoute>
-                        <PublicRoute isLogin={isLogin} path="/search/:keyword" exact>
+                        <PublicRoute isLogin={isLogin} path="/search" exact>
                             <Search />
+                        </PublicRoute>
+                        <PublicRoute isLogin={isLogin} path="/caregories/:id" exact>
+                            <Categories />
                         </PublicRoute>
                         <PublicRoute isLogin={isLogin} path="/login" restricted={true} exact>
                             <Login />

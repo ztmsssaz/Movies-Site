@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuthState } from "../../context";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DropSearch from '../../components/search';
 import Style from "./style";
 
 function Header() {
@@ -57,7 +56,7 @@ function Header() {
                         <div className="col-2 d-flex align-items-center rtl">
                             {handleLoginButton()}
                             <div className="px-4">
-                                <Link to="/search"><FontAwesomeIcon icon={faSearch} /></Link>
+                                <DropSearch />
                             </div>
                         </div>
                     </div>

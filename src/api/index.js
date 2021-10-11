@@ -12,7 +12,8 @@ import {
 } from './constance';
 
 // define the api
-const api = create({ baseURL: 'https://murmuring-tundra-31743.herokuapp.com/movies/3/' });
+const api = create({ baseURL: 'https://murmuring-tundra-31743.herokuapp.com/movies/3/', params: PARAMS });
+
 function errorHandling(response) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
 

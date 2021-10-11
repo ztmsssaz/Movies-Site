@@ -1,21 +1,27 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getRequest } from '../../api';
-import { useEffect } from "react";
-import { useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import { posterBaseUrl } from '../../constance';
 import { defaultImage } from '../../helpers';
+import Loading from '../../components/loading';
+import queryString from 'query-string';
 import Style from "./style";
 
 function Search() {
-    const { keyword } = useParams();
+    const { search } = useLocation();
     const [searchResults, setResults] = useState([]);
-    const params = { api_key: '4ba2c80bd43f2892ecb3349fa445015f', query: `${keyword}` };
+    let [searchKeyword, setSearchKeyword] = useState('');
+    let [isLoading, setIsLoading] = useState(true);
+
+    console.log(queryString.parse(search));
     useEffect(() => {
-        getRequest('/search/multi', params)
+        setIsLoading(true)
+        getRequest('/search/movie', queryString.parse(search))
             .then(response => {
+                setIsLoading(false)
                 setResults(response.data.results);
             })
-    }, [])
+    }, [search])
 
     function searchRenderFarm() {
         return (
@@ -33,10 +39,24 @@ function Search() {
             })
         )
     }
-
+    function searchKey(el) {
+        setSearchKeyword(el.target.value);
+    }
     return (
         <Style>
-            <div className="searchBox pt-5 mt-4 d-flex flex-wrap">
+            <div className="searchForm pt-5 mt-5 col-10 mx-auto">
+                <form name="search" className="position-relative mb-2">
+                    <input type="text" className="form-control py-2 rounded-pill" placeholder="Search for a movie, tv show, person......"
+                        onKeyUp={searchKey} />
+                    <Link to={`/search?query=${searchKeyword}`}>
+                        <button type="submit" className="btn btn-primary py-2 rounded-pill">
+                            Search
+                        </button>
+                    </Link>
+                </form>
+            </div>
+            <Loading isLoading={isLoading} />
+            <div className="d-flex flex-wrap">
                 {searchRenderFarm()}
             </div>
 

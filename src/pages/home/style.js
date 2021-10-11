@@ -13,15 +13,6 @@ const Style = styled.div`
     .container-holder{
         padding: 4rem 0;
     }
-    .searchForm{
-        form{
-            button{
-                position:absolute;
-                right:0;
-                top:0;
-            }
-        }
-    }
 }
 .mainSliders{
     max-width:1200px;

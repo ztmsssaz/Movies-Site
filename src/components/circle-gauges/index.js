@@ -12,11 +12,11 @@ function CircleProgressbar(props) {
         if (value < 40) {
             setStrokColor('red');
         }
-        else if (value < 70) {
+        else if (value < 69) {
             setStrokColor('yellow');
 
         }
-        else if (value >= 70) {
+        else if (value >= 69) {
             setStrokColor('green');
 
         }
