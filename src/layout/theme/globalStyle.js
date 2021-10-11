@@ -64,6 +64,8 @@ const GlobalStyle = createGlobalStyle`
 body,html{
   overflow-x:hidden;
   font-family:'karla';
+  padding-right: 0!important;
+  padding-left: 0!important;
 }
 a{
   text-decoration: none;
