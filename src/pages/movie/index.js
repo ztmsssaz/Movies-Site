@@ -1,5 +1,5 @@
 // import { Link } from "react-router-dom";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { getRequest } from '../../api';
 import { posterBaseUrl, backgroundMovieBaseUrl, galleryMovieBaseUrl } from "../../constance";
@@ -8,13 +8,12 @@ import { faHeart, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CircleProgressbar from '../../components/circle-gauges';
 import MiniSlider from '../../components/sliders/miniSlider';
-import MainSlider from '../../components/sliders/mainSlider';
-import YoutubeEmbed from '../../components/youtube-embed';
+// import YoutubeEmbed from '../../components/youtube-embed';
 // import get from 'lodash/get';
 import Style from "./style";
 
 function SeeMovie() {
-    const { id, mediaType } = useParams();
+    const { id } = useParams();
     const [movieInfo, setMovieData] = useState({});
     // const [keyTrailer, setKeyTrailer] = useState({ results: [] });
     const [similarMovies, setSimilarMovies] = useState({ results: [] });
@@ -23,7 +22,6 @@ function SeeMovie() {
     const [location, setLocation] = useState('');
     const [marked, setMarked] = useState(false);
     const history = useHistory();
-    console.log(mediaType);
     history.listen((location) => {
         setLocation(location);
     })
@@ -61,12 +59,12 @@ function SeeMovie() {
     function renderFarm() {
         if (movieInfo.overview) {
             return (
-                <div className="backgroundMovie" style={{ backgroundImage: `url(${backgroundMovieBaseUrl}${movieInfo.backdrop_path})` }}>
+                <div className="backgroundMovie" style={{ backgroundImage: movieInfo.backdrop_path ? `url(${backgroundMovieBaseUrl}${movieInfo.backdrop_path})` : 'none' }}>
                     <div className="backgroundDrop py-md-5">
                         <div className="container">
                             <div className="d-flex justify-content-start flex-wrap flex-md-nowrap py-4 px-1 py-sm-4">
                                 <div className="col-9 col-md-2">
-                                    <img className="img rounded-3" src={`${posterBaseUrl}${movieInfo.poster_path}`} onError={defaultImage} alt="ok" />
+                                    {<img className="img rounded-3" src={`${posterBaseUrl}${movieInfo.poster_path}`} onError={defaultImage} alt="ok" />}
                                 </div>
                                 <div className="infoBox text-white justify-content-start ps-sm-1 ps-md-5">
                                     <div>
@@ -77,7 +75,7 @@ function SeeMovie() {
                                             {
                                                 movieInfo.genres.map(item => {
                                                     return (
-                                                        <Link key={`${movieInfo.id, item.id}`} className="btn-light mt-2 rounded-pill mx-1 px-2" to={`categories/${item.id}`}> <small>{item.name}</small> </Link>
+                                                        <Link key={`${movieInfo.id, item.id}`} className="btn-light mt-2 rounded-pill mx-1 px-2" to={`/categories/${item.name}/${item.id}`}> <small>{item.name}</small> </Link>
                                                     )
                                                 })
                                             }
@@ -86,7 +84,7 @@ function SeeMovie() {
                                     </div>
                                     <div className="py-2 d-flex align-items-center">
                                         <div className="d-flex">
-                                            <CircleProgressbar width={50} value={40} />
+                                            <CircleProgressbar width={50} value={movieInfo.vote_average * 10} />
                                             <b className="px-2">User <br /> Score</b>
                                         </div>
                                         <div className="col-12 col-sm-2 d-flex justify-content-around">
@@ -120,11 +118,9 @@ function SeeMovie() {
         setModalImage(movieImages.backdrops[el.target.attributes.index.value].file_path);
     }
     function gallery_RenderFarm() {
-
-        if (movieImages.backdrops.length > 0) {
-
-            return (
-                movieImages.backdrops.map((item, index) => {
+        return (
+            movieImages.backdrops.map((item, index) => {
+                if (item.file_path) {
                     return (
                         <div key={`${item.file_path}`} index={index} onClick={seeGalleryImage} className="galleryImage col-6 col-md-4" type="button" data-bs-toggle="modal" data-bs-target="#seeGalleryImage" >
                             <div className="m-1 rounded" >
@@ -132,9 +128,10 @@ function SeeMovie() {
                             </div>
                         </div>
                     )
-                })
-            )
-        }
+                }
+
+            })
+        )
     }
     function similarMovies_RenderFarm() {
         if (similarMovies) {
@@ -154,27 +151,32 @@ function SeeMovie() {
                 {renderFarm()}
             </section>
             <section className="container">
-                <h3 className="my-3">Gallery</h3>
-                <div className="d-flex flex-wrap">
-                    {gallery_RenderFarm()}
-                </div>
-            </section>
-            <section>
-                <div className="trailer col-12 col-md-12">
-                    {similarMovies_RenderFarm()}
-                </div>
-
+                {movieImages.backdrops.length > 0 &&
+                    <div>
+                        <h3>Gallery</h3>
+                        <div className="d-flex flex-wrap">
+                            {gallery_RenderFarm()}
+                        </div>
+                    </div>
+                }
                 <div className="modal fade rounded" id="seeGalleryImage" tabIndex="-1" aria-labelledby="seeGalleryImageLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered modal-lg">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
+                            {modalImage &&
+                                <img src={`${galleryMovieBaseUrl}/original${modalImage}`} alt="original poster" />
+                            }
                             <div>
-                                <img src={`${galleryMovieBaseUrl}/original${modalImage}`} alt="" />
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+            <section>
+                <div className="trailer col-12 col-md-12">
+                    {similarMovies_RenderFarm()}
                 </div>
             </section>
         </Style>

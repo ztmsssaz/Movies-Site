@@ -28,21 +28,15 @@ function Home() {
     }, [])
     async function callSlidersApi() {
         try {
-            [
-                topRated,
-                nowPlayingMovies,
-                upComingMovies,
-            ] = await Promise.all([
-                (topRated = await getRequest('/movie/top_rated')),
-                (nowPlayingMovies = await getRequest('/movie/now_playing')),
-                (upComingMovies = await getRequest('/movie/upcoming')),
-            ])
+            topRated = await getRequest('/movie/top_rated');
+            upComingMovies = await getRequest('/movie/upcoming');
+            nowPlayingMovies = await getRequest('/movie/now_playing');
         } catch (err) {
             console.log(err);
         } finally {
             setTopRated(topRated.data);
-            setPlayingMovies(nowPlayingMovies.data);
             setComingMovies(upComingMovies.data);
+            setPlayingMovies(nowPlayingMovies.data);
         }
     }
     function renderFarm() {
@@ -83,11 +77,11 @@ function Home() {
                     <div className="container-holder">
                         <div className="d-flex flex-column text-light">
                             <h2 className="text-capitalize">Welcome</h2>
-                            <h3>Millions of movies, TV shows and people to discover. Explore now.</h3>
+                            <h3>Millions of movies to discover. Explore now.</h3>
                         </div>
                         <div className="searchForm mx-auto">
                             <form name="search" className="position-relative mt-5">
-                                <input type="text" className="form-control py-2 rounded-pill" placeholder="Search for a movie, tv show, person......"
+                                <input type="text" className="form-control py-2 rounded-pill" placeholder="Search for a movie ...."
                                     onKeyUp={search} />
                                 <Link to={`/search?query=${searchKeyword}`}>
                                     <button type="submit" className="btn btn-primary py-2 rounded-pill">

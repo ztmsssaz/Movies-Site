@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getRequest } from "../../api";
 import { posterBaseUrl } from '../../constance';
-import { defaultImage } from '../../helpers';
+import { defaultImage, textDots } from '../../helpers';
 import Style from "./style";
 
 function Searching() {
@@ -26,17 +26,31 @@ function Searching() {
             setInputValue('')
         })
     }, [inputValue])
+    function searchHandler(e) {
+        const value = e.target.value;
+        if (value.length >= 2) {
+            setInputValue(e.target.value)
+        } else {
+            setSearchResults({});
+            setInputValue('');
+        }
+    }
     function renderFarm() {
         if (searchResults.results) {
             return (
                 searchResults.results.map((item) => {
                     return (
                         <div key={item.id} data-bs-dismiss="offcanvas" aria-label="Close">
-                            <Link className="rounded d-flex align-items-center m-1 ltr" to={`/movie/${item.id}`} >
-                                <div className="searchImage d-flex" data-bs-dismiss="offcanvas" aria-label="Close">
-                                    <img className="rounded" src={`${posterBaseUrl}${item.poster_path}`} alt="poster path" onError={defaultImage} />
+                            <Link className="rounded m-1 ltr" to={`/movie/${item.id}`} >
+                                <div className="d-flex  align-items-center" data-bs-dismiss="offcanvas" aria-label="Close">
+                                    <div className="searchImage ">
+                                        <img src={`${posterBaseUrl}${item.poster_path}`} alt="poster path" onError={defaultImage} />
+                                    </div>
+                                    <div className="px-2">
+                                        <h5 >{item.original_title || item.title} <small>- {item.release_date.split('-')[0]}</small></h5>
+                                        <p className="d-block">{textDots(item.overview, 45)}</p>
+                                    </div>
                                 </div>
-                                <h5 className="px-2">{item.original_title || item.title}</h5>
                             </Link>
                         </div>
                     )
@@ -55,7 +69,8 @@ function Searching() {
                     <button type="button" className="mb-1 mx-2 btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="position-relative col-12 col-sm-10 col-md-6 mx-auto">
-                    <input className="form-control text-center" value={inputValue} placeholder="Search Movies here" onChange={e => setInputValue(e.target.value)} type="text" />
+                    <input className="form-control text-center" placeholder="Search Movies here"
+                        onKeyUp={searchHandler} type="text" />
                     <div className="searchReasultsBox bg-light">
                         {renderFarm()}
                     </div>

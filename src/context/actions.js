@@ -25,4 +25,5 @@ export async function loginUser(dispatch, loginPayLoad) {
 export function logOut(dispatch) {
     dispatch({ type: 'LOGOUT' });
     localStorage.removeItem('currentUser');
+    window.location.reload();
 }

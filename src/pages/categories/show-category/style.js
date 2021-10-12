@@ -6,15 +6,6 @@ const theme = {
 
 }
 const Style = styled.div`
-.genreBox{
-    min-width:20%;
-    a{
-        background:${theme.background};
-        transition:background 0.3s;
-        &:hover {
-        background:${theme.backgroundHover};
-        }
-    }
-}
+
 `
 export default Style;

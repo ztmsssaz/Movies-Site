@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 const Style = styled.div`
 .searchImage{
-    max-width:60px;
+    max-width:70px;
 }
 .offcanvas{
     max-height:120px;
+    min-height:120px;
 }
 .searchReasultsBox{
     max-height:300px;

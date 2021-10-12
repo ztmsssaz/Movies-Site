@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { getRequest } from '../../api';
 import { useEffect, useState } from "react";
 import { posterBaseUrl } from '../../constance';
-import { defaultImage } from '../../helpers';
+import { defaultImage, textDots } from '../../helpers';
 import Loading from '../../components/loading';
 import queryString from 'query-string';
 import Style from "./style";
@@ -13,8 +13,8 @@ function Search() {
     let [searchKeyword, setSearchKeyword] = useState('');
     let [isLoading, setIsLoading] = useState(true);
 
-    console.log(queryString.parse(search));
     useEffect(() => {
+        console.log(queryString.parse(search));
         setIsLoading(true)
         getRequest('/search/movie', queryString.parse(search))
             .then(response => {
@@ -27,13 +27,13 @@ function Search() {
         return (
             searchResults.map(item => {
                 return (
-                    <div key={item.id} className="d-flex flex-column flex-wrap">
-                        <div className="">
-                            <Link to={`/movie/${item.id}`}>
-                                <img className="mx-auto" width="100px" src={`${posterBaseUrl}${item.poster_path}`} onError={defaultImage} alt="" />
-                            </Link>
-                        </div>
-                        <h5>{item.title}</h5>
+                    <div key={item.id} className="my-2 movieBox col-5 col-sm-2">
+                        <Link className="text-dark shadow bg-white rounded-3 mx-2" to={`/movie/${item.id}`}>
+                            <div>
+                                <img className="rounded-3" src={`${posterBaseUrl}${item.poster_path}`} onError={defaultImage} alt="" />
+                            </div>
+                            <h5 className="py-2 text-center text-truncate">{item.title || item.original_title}</h5>
+                        </Link>
                     </div>
                 )
             })
@@ -56,7 +56,7 @@ function Search() {
                 </form>
             </div>
             <Loading isLoading={isLoading} />
-            <div className="d-flex flex-wrap">
+            <div className="d-flex flex-wrap justify-content-center">
                 {searchRenderFarm()}
             </div>
 

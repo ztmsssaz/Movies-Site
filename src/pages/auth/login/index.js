@@ -56,7 +56,7 @@ function Login() {
                             <div className="form-group py-1">
                                 <label htmlFor="password">Password</label>
                                 <div className="position-relative">
-                                    <input className="form-control" id="password" name="password" type={passType} placeholder="password" autoComplete="current-password"
+                                    <input className="form-control" id="password" name="password" type={passType} placeholder="password" autoComplete="password"
                                         onChange={e => setPassword(e.target.value)} />
                                     <FontAwesomeIcon className="showPassword" icon={faEye} onClick={handlePasswordType} />
                                 </div>

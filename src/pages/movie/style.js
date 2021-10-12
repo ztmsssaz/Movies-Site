@@ -49,8 +49,5 @@ const Style = styled.div`
             transition: 0.4s;
     }
 }
-.modal-header{
-    background-image: linear-gradient(to left,#073844 , #032541);
-}
 `
 export default Style;

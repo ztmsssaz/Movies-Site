@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import Searching from '../../components/searching'
-import { useAuthState } from "../../context";
+import { useAuthState, logOut, useAuthDispatch } from "../../context";
 import Style from "./style";
 
 function Header() {
     const authState = useAuthState();
+    const dispatch = useAuthDispatch();
+
+    function logout() {
+        logOut(dispatch);
+    }
     function handleLoginButton() {
         if (!authState.sessionId) {
             return (
@@ -28,7 +33,7 @@ function Header() {
                         <li><Link to="/lists" className="dropdown-item">Lists</Link></li>
                         <li><Link to="/favorites" className="dropdown-item">Favorites</Link></li>
                         <li><Link to="/ratings" className="dropdown-item border-bottom">Ratings</Link></li>
-                        <li><Link to="/logout" className="dropdown-item">Logout</Link></li>
+                        <li><a href="/" onClick={logout} className="dropdown-item">Logout</a></li>
                     </ul>
                 </div>
             )
@@ -49,7 +54,7 @@ function Header() {
                                     <li className="mx-1 text-uppercase"><Link className="p-2" to="/">Movies</Link></li>
                                     <li className="mx-1 text-uppercase"><Link className="p-2" to="/">Series</Link></li>
                                     <li className="mx-1 text-uppercase"><Link className="p-2" to="/">TV SHOWS</Link></li>
-                                    <li className="mx-1 text-uppercase"><Link className="p-2" to="/">Categories</Link></li>
+                                    <li className="mx-1 text-uppercase"><Link className="p-2" to="/categories">Categories</Link></li>
                                 </ul>
                             </nav>
                         </div>
