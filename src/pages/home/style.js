@@ -9,7 +9,6 @@ const Style = styled.div`
     min-height:320px;
     background: url('/images/background/home-header-${getRandomInt(5)}.jpg') top center no-repeat;
     background-size: cover;
-    padding-top:90px;
     .container-holder{
         padding: 4rem 0;
     }

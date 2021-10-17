@@ -44,7 +44,6 @@ function MainRouter() {
                             <Login />
                         </PublicRoute>
                         <PrivateRoute isLogin={isLogin} path="/profile" exact>
-                            <ProfileHeader />
                             <UserProfile />
                         </PrivateRoute>
                     </Switch>

@@ -7,15 +7,16 @@ import { toHours, defaultImage } from '../../helpers';
 import { faHeart, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CircleProgressbar from '../../components/circle-gauges';
+import WatchList from '../../components/watchList';
 import MiniSlider from '../../components/sliders/miniSlider';
-// import YoutubeEmbed from '../../components/youtube-embed';
+import YoutubeEmbed from '../../components/youtube-embed';
 // import get from 'lodash/get';
 import Style from "./style";
 
 function SeeMovie() {
     const { id } = useParams();
     const [movieInfo, setMovieData] = useState({});
-    // const [keyTrailer, setKeyTrailer] = useState({ results: [] });
+    const [keyTrailer, setKeyTrailer] = useState({ results: [{ key: '' }] });
     const [similarMovies, setSimilarMovies] = useState({ results: [] });
     const [movieImages, setMovieImages] = useState({ backdrops: [] });
     const [modalImage, setModalImage] = useState('');
@@ -33,10 +34,11 @@ function SeeMovie() {
                 console.log(response);
                 setMovieData(response.data);
             })
-        // getRequest(`/movie/${id}/videos`)
-        //     .then(response => {
-        //         setKeyTrailer(response.data);
-        //     })
+        getRequest(`/movie/${id}/videos`)
+            .then(response => {
+                console.log(response.data);
+                setKeyTrailer(response.data);
+            })
         getRequest(`/movie/${id}/similar`)
             .then(response => {
                 setSimilarMovies(response.data);
@@ -147,7 +149,7 @@ function SeeMovie() {
     }
     return (
         <Style>
-            <section className="movieDetails pt-5 mt-4">
+            <section className="movieDetails">
                 {renderFarm()}
             </section>
             <section className="container">
@@ -174,11 +176,15 @@ function SeeMovie() {
                     </div>
                 </div>
             </section>
+            <section className="container">
+                {keyTrailer.results.length && <YoutubeEmbed embedId={keyTrailer.results[0].key} />}
+            </section>
             <section>
                 <div className="trailer col-12 col-md-12">
                     {similarMovies_RenderFarm()}
                 </div>
             </section>
+            <WatchList />
         </Style>
     )
 }

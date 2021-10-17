@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { AuthProvider } from './context';
 import MainRouter from "./router";
 import './App.css';
@@ -6,11 +5,11 @@ import './App.css';
 function App() {
 
   return (
-    <Fragment>
+    <div className="spacingTop">
       <AuthProvider>
         <MainRouter />
       </AuthProvider>
-    </Fragment>
+    </div>
   );
 }
 

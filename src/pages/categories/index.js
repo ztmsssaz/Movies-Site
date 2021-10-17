@@ -37,8 +37,8 @@ function Categories() {
 
     return (
         <Style>
-            <div className="container pt-4 mt-5">
-                <h3 className="pt-5">Genres</h3>
+            <div className="container">
+                <h3 >Genres</h3>
                 <Loading isLoading={loading} />
                 <div className="d-flex flex-wrap align-items-center">
                     {renderFarm()}

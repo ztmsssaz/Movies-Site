@@ -44,7 +44,7 @@ function Search() {
     }
     return (
         <Style>
-            <div className="searchForm pt-5 mt-5 col-10 mx-auto">
+            <div className="searchForm col-10 mx-auto">
                 <form name="search" className="position-relative mb-2">
                     <input type="text" className="form-control py-2 rounded-pill" placeholder="Search for a movie, tv show, person......"
                         onKeyUp={searchKey} />

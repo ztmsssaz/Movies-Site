@@ -9,7 +9,7 @@ function ProfileHeader() {
     const userInfo = useAuthState()
     return (
         <Style>
-            <section className="userArea spacing bg-image">
+            <section className="userArea bg-image">
                 <div className="inner_content py-4">
                     <div className="container">
                         <div className="d-flex align-items-center">

@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const theme = {
   primaryColor: '#dd003f',
-  primary: '#1890ff',
+  scoundry: '#083143',
   btnHover: '#aa0433',
   white: '#ffffff',
   whiteSecondary: '#f8f8f8',
@@ -113,6 +113,40 @@ a{
             top:0;
         }
     }
+}
+.pagination{
+  height:40px;
+  border: 1px solid #edf1f7;
+  width:fit-content;
+  border-radius:10px;
+  margin:0 auto;
+  .active{
+    background-color: ${theme.scoundry};
+    color:${theme.white}
+  }
+  li{
+    &:not(:last-child){
+      border-left: 1px solid #edf1f7;
+    }
+    display:flex;
+    alighn-items:center;
+    &.previous a {
+      border-radius:10px 0 0 10px;
+      min-width: 71px;
+    }
+    &.next a {
+      border-radius:0 10px 10px 0;
+      min-width: 65px;
+    }
+    a {
+      cursor: pointer;
+      padding:10px 15px;
+      &:hover{
+        background-color: ${theme.primaryColor} !important;
+        color: #fff !important;
+      }
+    }
+  }
 }
 `
 
