@@ -47,7 +47,7 @@ function Searching() {
                                         <img src={`${posterBaseUrl}${item.poster_path}`} alt="poster path" onError={defaultImage} />
                                     </div>
                                     <div className="px-2">
-                                        <h5 >{item.original_title || item.title} <small>- {item.release_date.split('-')[0]}</small></h5>
+                                        <h5 >{item.original_title || item.title} {item.release_date && <small >- {item.release_date.split('-')[0]}</small>}</h5>
                                         <p className="d-block">{textDots(item.overview, 45)}</p>
                                     </div>
                                 </div>

@@ -13,7 +13,7 @@ function Footer() {
                     <div className="d-flex justify-content-around flex-wrap text-center">
                         <div className="col-6 col-sm-3 mt-4">
                             <div className="footerLogo">
-                                <img src="/footer-logo.svg" alt="footer logo" />
+                                <img src="/images/icons/footer-logo.svg" alt="footer logo" />
                                 <h6 className="text-light py-3">Hi {userInfo.name || userInfo.username} !</h6>
                             </div>
                         </div>
@@ -29,7 +29,7 @@ function Footer() {
                         <div className="col-6 col-sm-3 mt-4">
                             <h5 className="text-uppercase"><b>THE BASICS</b></h5>
                             <ul className="text-capitalize">
-                                <li><Link to="/">About Us</Link></li>
+                                <li><Link to="/about-us">About Us</Link></li>
                                 <li><Link to="/">Contact Us</Link></li>
                                 <li><Link to="/">Categories</Link></li>
                                 <li><Link to="/profile">Profile</Link></li>

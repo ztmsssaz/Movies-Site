@@ -7,7 +7,7 @@ import { toHours, defaultImage } from '../../helpers';
 import { faHeart, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CircleProgressbar from '../../components/circle-gauges';
-import WatchList from '../../components/watchList';
+import Rating from '../../components/rating';
 import MiniSlider from '../../components/sliders/miniSlider';
 import YoutubeEmbed from '../../components/youtube-embed';
 // import get from 'lodash/get';
@@ -92,11 +92,10 @@ function SeeMovie() {
                                         <div className="col-12 col-sm-2 d-flex justify-content-around">
                                             <div className="mark-movie d-flex justify-content-center rounded-circle px-2"
                                                 onClick={AddToFavoritesList}>
-                                                <FontAwesomeIcon className={`h-100 ${marked ? "text-danger" : ""}`} icon={faHeart} />
-                                            </div>
-                                            <div className="mark-movie d-flex justify-content-center rounded-circle px-2"
-                                                onClick={addToWatchList}>
-                                                <FontAwesomeIcon className={`h-100  ${marked ? "text-danger" : ""}`} icon={faBookmark} />
+                                                <FontAwesomeIcon className={`h-100 ${marked ? "text-warning" : ""}`} icon={faHeart} />
+                                                <div className="rating py-2">
+                                                    <Rating />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -184,7 +183,6 @@ function SeeMovie() {
                     {similarMovies_RenderFarm()}
                 </div>
             </section>
-            <WatchList />
         </Style>
     )
 }

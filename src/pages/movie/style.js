@@ -49,5 +49,23 @@ const Style = styled.div`
             transition: 0.4s;
     }
 }
+.mark-movie{
+    position:relative;
+    cursor:pointer;
+    text-align:center;
+    .rating{
+        transition:0.2s;
+        visibility:hidden;
+        position:absolute;
+        opacity:0;
+        top:105%;
+        background:${theme.marker};
+        min-width:120px;
+    }
+    &:hover .rating{
+        opacity:1;
+        visibility:visible;
+    }
+}
 `
 export default Style;

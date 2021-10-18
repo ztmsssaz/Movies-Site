@@ -7,7 +7,6 @@ import Style from "./style";
 import { profileBaseUrl, gravatarBaseUrl } from '../../constance'
 
 function UserProfile() {
-    const default_avatar = 'https://secure.gravatar.com/avatar/041ff51dc000a37dd54232e215063ee8.jpg?s=150';
     const satateInfo = useAuthState();
     const [profileInfo, setProfileInfo] = useState({});
 
@@ -41,7 +40,7 @@ function UserProfile() {
                                 renderprofileImage()}
                             </div>
                             <div className="aboutUser px-4 text-white">
-                                <h2 className="text-center text-md-start"><b>{satateInfo.username}</b></h2>
+                                <h2 className="text-center text-md-start"><b>{profileInfo.name || satateInfo.username}</b></h2>
                                 <div className="d-flex">
                                     <div className="d-flex align-items-center me-3">
                                         <CircleProgressbar value={100} width={60} />
