@@ -9,20 +9,20 @@ import Style from "./style";
 
 function Searching() {
     const [inputValue, setInputValue] = useState('');
-    const [searchResults, setSearchResults] = useState({ results: [] });
+    const [searchResults, setSearchResults] = useState([]);
 
     useEffect(() => {
         if (inputValue.length >= 2) {
             getRequest(`/search/movie?query=${inputValue}`)
                 .then(res => {
-                    setSearchResults(res.data);
+                    setSearchResults(res.data.results);
                 })
         } else if (inputValue.length === 0) {
             setInputValue('');
         }
         var myOffcanvas = document.getElementById('offcanvasTop')
         myOffcanvas.addEventListener('hidden.bs.offcanvas', function () {
-            setSearchResults({});
+            setSearchResults([]);
             setInputValue('')
         })
     }, [inputValue])
@@ -31,14 +31,14 @@ function Searching() {
         if (value.length >= 2) {
             setInputValue(e.target.value)
         } else {
-            setSearchResults({});
+            setSearchResults([]);
             setInputValue('');
         }
     }
     function renderFarm() {
-        if (searchResults.results) {
+        if (searchResults.length > 0) {
             return (
-                searchResults.results.map((item) => {
+                searchResults.map((item) => {
                     return (
                         <div key={item.id} data-bs-dismiss="offcanvas" aria-label="Close">
                             <Link className="rounded m-1 ltr" to={`/movie/${item.id}`} >
@@ -55,6 +55,12 @@ function Searching() {
                         </div>
                     )
                 })
+            )
+        } else if (inputValue !== '') {
+            return (
+                <div className="text-center overflow-hidden">
+                    <h6>Movie Not Found</h6>
+                </div>
             )
         }
     }

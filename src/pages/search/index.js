@@ -1,27 +1,24 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getRequest } from '../../api';
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { posterBaseUrl } from '../../constance';
 import { defaultImage, textDots } from '../../helpers';
 import Loading from '../../components/loading';
-import queryString from 'query-string';
 import Style from "./style";
 
 function Search() {
-    const { search } = useLocation();
     const [searchResults, setResults] = useState([]);
     let [searchKeyword, setSearchKeyword] = useState('');
     let [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        console.log(queryString.parse(search));
-        setIsLoading(true)
-        getRequest('/search/movie', queryString.parse(search))
-            .then(response => {
-                setIsLoading(false)
-                setResults(response.data.results);
-            })
-    }, [search])
+    // useEffect(() => {
+    //     setIsLoading(true)
+    //     getRequest('/search/movie', queryString.parse(search))
+    //         .then(response => {
+    //             setIsLoading(false)
+    //             setResults(response.data.results);
+    //         })
+    // }, [search])
 
     function searchRenderFarm() {
         return (
@@ -42,6 +39,27 @@ function Search() {
     function searchKey(el) {
         setSearchKeyword(el.target.value);
     }
+    function renderFilter() {
+        return (
+            <Fragment>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#filters">salam</button>
+                <div className="modal fade rounded" id="filters" tabIndex="-1" aria-labelledby="filtersLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered modal-lg">
+                        <div className="modal-content position-relative">
+                            <input list="region" />
+                            <datalist name="region" id="region">
+                                <option>AT</option>
+                                <option>IR - iran</option>
+                                <option>AGH - Afghanistan</option>
+                                <option>Korea</option>
+                                <option>USA - united States of america</option>
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+            </Fragment>
+        )
+    }
     return (
         <Style>
             <div className="searchForm col-10 mx-auto">
@@ -59,7 +77,7 @@ function Search() {
             <div className="d-flex flex-wrap justify-content-center">
                 {searchRenderFarm()}
             </div>
-
+            {renderFilter()}
         </Style>
     )
 }

@@ -4,7 +4,7 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import { getRequest } from '../../api';
 import { posterBaseUrl, backgroundMovieBaseUrl, galleryMovieBaseUrl } from "../../constance";
 import { toHours, defaultImage } from '../../helpers';
-import { faHeart, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faBookmark, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CircleProgressbar from '../../components/circle-gauges';
 import Rating from '../../components/rating';
@@ -93,8 +93,8 @@ function SeeMovie() {
                                             <div className="mark-movie d-flex justify-content-center rounded-circle px-2"
                                                 onClick={AddToFavoritesList}>
                                                 <FontAwesomeIcon className={`h-100 ${marked ? "text-warning" : ""}`} icon={faHeart} />
-                                                <div className="rating py-2">
-                                                    <Rating />
+                                                <div className="rating d-flex justify-content-center py-2">
+                                                    <Rating movieId={movieInfo.id} />
                                                 </div>
                                             </div>
                                         </div>
@@ -113,7 +113,6 @@ function SeeMovie() {
                 </div>
             )
         }
-
     }
     function seeGalleryImage(el) {
         setModalImage(movieImages.backdrops[el.target.attributes.index.value].file_path);
@@ -162,10 +161,8 @@ function SeeMovie() {
                 }
                 <div className="modal fade rounded" id="seeGalleryImage" tabIndex="-1" aria-labelledby="seeGalleryImageLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered modal-lg">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                        <div className="modal-content position-relative">
+                            <button type="button" className="btn-times px-1 rounded" data-bs-dismiss="modal" aria-label="Close"><FontAwesomeIcon icon={faTimes} /></button>
                             {modalImage &&
                                 <img src={`${galleryMovieBaseUrl}/original${modalImage}`} alt="original poster" />
                             }
@@ -175,9 +172,10 @@ function SeeMovie() {
                     </div>
                 </div>
             </section>
-            <section className="container">
-                {keyTrailer.results.length && <YoutubeEmbed embedId={keyTrailer.results[0].key} />}
-            </section>
+            {keyTrailer.results.lengths && <section className="container">
+                <h3>Trailer</h3>
+                <YoutubeEmbed embedId={keyTrailer.results[0].key} />
+            </section>}
             <section>
                 <div className="trailer col-12 col-md-12">
                     {similarMovies_RenderFarm()}

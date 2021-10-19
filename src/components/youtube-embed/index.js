@@ -10,6 +10,7 @@ const YoutubeEmbed = ({ embedId, height = 480 }) => (
             title="Embedded youtube"
         />
     </div>
+
 );
 
 YoutubeEmbed.propTypes = {

@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { getRequest } from "../../../api";
 import { posterBaseUrl } from "../../../constance";
 import { defaultImage } from "../../../helpers";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Loading from "../../../components/loading";
 import ReactPaginate from 'react-paginate';
@@ -17,7 +17,7 @@ function ShowCategory() {
 
     useEffect(() => {
         document.title = "category";
-        getRequest('/discover/movie', { with_genres: id, page })
+        getRequest('/discover/movie', { with_genres: id, language: "fa", page })
             .then((res) => {
                 setLoading(false)
                 setMovies(res.data);
@@ -43,14 +43,11 @@ function ShowCategory() {
             })
         )
     }
-
     return (
         <Style>
             <div className="container">
-                <h3 className="pt-5">
-                    <span>Genres</span>
-                    <span className="px-3 fs-4"><FontAwesomeIcon icon={faAngleRight} /></span>
-                    <span>{name}</span>
+                <h3 className="pt-4">
+                    <span><Link to={`/categories`} className="px-3 fs-4 d-inline-block"><FontAwesomeIcon icon={faAngleLeft} /></Link>{name}</span>
                 </h3>
                 <Loading isLoading={loading} />
                 <div className="d-flex flex-wrap align-items-center">

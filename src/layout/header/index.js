@@ -52,7 +52,7 @@ function Header() {
                                 <ul className="d-flex">
                                     <li className="mx-1 text-uppercase"><Link className="p-2" to="/">Home</Link></li>
                                     <li className="mx-1 text-uppercase"><Link className="p-2" to="/">Movies</Link></li>
-                                    <li className="mx-1 text-uppercase"><Link className="p-2" to="/">Series</Link></li>
+                                    <li className="mx-1 text-uppercase"><Link className="p-2" to="/search">Search</Link></li>
                                     <li className="mx-1 text-uppercase"><Link className="p-2" to="/categories">Categories</Link></li>
                                 </ul>
                             </nav>

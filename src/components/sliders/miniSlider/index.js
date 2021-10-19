@@ -36,7 +36,7 @@ export default function MiniSlider(props) {
                                     <CircleProgressbar fontSize={32} value={(item.vote_average * 10)} width={40} />
                                 </div>
                             </div>
-                            <h6 className="text-center px-1 pt-4 text-truncate" title={item.original_title}><b>{textDots(item.original_title, 15)}</b></h6>
+                            <h6 className="text-center px-1 pt-4 text-truncate" title={item.original_title}><b><small>{(item.original_title)}</small></b></h6>
                             <div className="text-center pb-2">{item.release_date.split('-')[0]}</div>
                         </Link>
                     </SwiperSlide>

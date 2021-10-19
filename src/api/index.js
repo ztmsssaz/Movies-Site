@@ -63,7 +63,7 @@ api.addResponseTransform((response) => {
 export async function getRequest(url, params = PARAMS) {
     return api.get(url, params);
 }
-export async function postRequest(url, body, ctx) {
+export async function postRequest(url, body) {
     return api.post(url, body);
 }
 export async function putRequest(url, params) {

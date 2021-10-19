@@ -1,55 +1,39 @@
 import { useEffect } from "react";
 import { postRequest } from '../../api';
+import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactStars from "react-rating-stars-component";
 import { Style } from "./style";
+import { useAuthState } from "../../context";
 
-function Rating(props) {
+function RatingMovie(props) {
     const { movieId } = props;
+    const userInfo = useAuthState();
+    console.log(userInfo);
     useEffect(() => {
 
     }, [])
 
-    function rateMovie(params) {
-        postRequest(`/movie/${movieId}/rating`)
+    function rateMovie(value) {
+        postRequest(`/movie/${movieId}/rating`, { value })
             .then((res) => {
                 console.log(res);
             });
-        console.log(params);
+        console.log(value);
     }
     return (
         <Style>
-            <div className="nav-star d-flex flex-row-reverse justify-content-center">
-                <div onClick={e => rateMovie(10)} className="link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path
-                            d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
-                    </svg>
-                </div>
-                <div onClick={e => rateMovie(8)} className="link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path
-                            d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
-                    </svg>
-                </div>
-                <div onClick={e => rateMovie(6)} className="link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path
-                            d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
-                    </svg>
-                </div>
-                <div onClick={e => rateMovie(4)} className="link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path
-                            d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
-                    </svg>
-                </div>
-                <div onClick={e => rateMovie(2)} className="link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path
-                            d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
-                    </svg>
-                </div>
-            </div>
+            <ReactStars
+                count={5}
+                onChange={rateMovie}
+                size={20}
+                isHalf={true}
+                emptyIcon={<FontAwesomeIcon icon={faStar} />}
+                halfIcon={<FontAwesomeIcon icon={faStarHalfAlt} />}
+                filledIcon={<FontAwesomeIcon icon={faStar} />}
+                activeColor="#ffe000"
+            />
         </Style>
     )
 }
-export default Rating;
+export default RatingMovie;

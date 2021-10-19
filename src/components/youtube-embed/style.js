@@ -6,8 +6,8 @@ const Style = styled.div`
     padding-bottom: 56.25%;
     position: relative;
     height: 0;
-  }
-  .video-responsive iframe {
+    background:url('/images/background/deadpool.png');
+   iframe {
     left: 0;
     top: 0;
     height: 100%;

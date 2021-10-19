@@ -2,7 +2,8 @@ import styled from 'styled-components';
 const theme = {
     dark: '#111',
     white: '#fff',
-    marker: '#032541'
+    marker: '#032541',
+    gray: '#ddd'
 }
 const Style = styled.div`
 .movieDetails{
@@ -60,12 +61,27 @@ const Style = styled.div`
         opacity:0;
         top:105%;
         background:${theme.marker};
-        min-width:120px;
+        min-width:130px;
     }
     &:hover .rating{
         opacity:1;
         visibility:visible;
     }
+}
+.modal{
+    .btn-times{
+        position:absolute;
+        top:10px;
+        left:10px;
+        transition:color 0.3s;
+        color:${theme.white};
+        border:none;
+        background-color:rgb(160 160 160 / 30%);
+        &:hover{
+            color:${theme.gray};
+        }
+    }
+
 }
 `
 export default Style;
