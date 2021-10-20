@@ -8,6 +8,7 @@ import {
     HTTP_STATUS_CODE_FORBIDDEN,
     HTTP_STATUS_CODE_NOT_FOUND,
     HTTP_STATUS_CODE_SERVER_ERROR,
+    HTTP_STATUS_CODE_UNPROCESSABLE_ENTITY,
     PARAMS
 } from './constance';
 
@@ -33,6 +34,10 @@ api.addResponseTransform((response) => {
             break;
         // 404
         case HTTP_STATUS_CODE_NOT_FOUND:
+            errorHandling(response);
+            break;
+        // 422
+        case HTTP_STATUS_CODE_UNPROCESSABLE_ENTITY:
             errorHandling(response);
             break;
         // 500

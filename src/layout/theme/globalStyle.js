@@ -120,6 +120,7 @@ a{
   width:fit-content;
   border-radius:10px;
   margin:0 auto;
+  background-color: ${theme.white};
   .active{
     background-color: ${theme.scoundry};
     color:${theme.white}

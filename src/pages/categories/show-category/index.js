@@ -17,7 +17,7 @@ function ShowCategory() {
 
     useEffect(() => {
         document.title = "category";
-        getRequest('/discover/movie', { with_genres: id, language: "fa", page })
+        getRequest('/discover/movie', { with_genres: id, page })
             .then((res) => {
                 setLoading(false)
                 setMovies(res.data);
