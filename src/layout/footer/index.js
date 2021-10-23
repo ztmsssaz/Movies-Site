@@ -21,18 +21,15 @@ function Footer() {
                             <h5 className="text-uppercase"><b>THE BASICS</b></h5>
                             <ul className="text-capitalize">
                                 <li><Link to="/">Home</Link></li>
-                                <li><Link to="/">Movies</Link></li>
-                                <li className="text-uppercase"><Link to="/">TV Show</Link></li>
-                                <li><Link to="/">Series</Link></li>
+                                <li><Link to="/">Search</Link></li>
                             </ul>
                         </div>
                         <div className="col-6 col-sm-3 mt-4">
                             <h5 className="text-uppercase"><b>THE BASICS</b></h5>
                             <ul className="text-capitalize">
-                                <li><Link to="/about-us">About Us</Link></li>
-                                <li><Link to="/">Contact Us</Link></li>
-                                <li><Link to="/">Categories</Link></li>
                                 <li><Link to="/profile">Profile</Link></li>
+                                <li><Link to="/about-us">About Us</Link></li>
+                                <li><Link to="/categories">Categories</Link></li>
                             </ul>
                         </div>
                         <div className="col-6 col-sm-3 mt-4">

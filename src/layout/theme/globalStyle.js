@@ -130,7 +130,7 @@ a{
       border-left: 1px solid #edf1f7;
     }
     display:flex;
-    alighn-items:center;
+    align-items:center;
     &.previous a {
       border-radius:10px 0 0 10px;
       min-width: 71px;

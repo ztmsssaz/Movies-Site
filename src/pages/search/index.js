@@ -3,7 +3,6 @@ import { getRequest } from '../../api';
 import { Fragment, useEffect, useState } from "react";
 import { posterBaseUrl } from '../../constance';
 import { defaultImage } from '../../helpers';
-import Loading from '../../components/loading';
 import ReactPaginate from "react-paginate";
 import queryString from 'query-string';
 import Style from "./style";

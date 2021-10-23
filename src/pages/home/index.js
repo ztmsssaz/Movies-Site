@@ -10,34 +10,38 @@ import Style from "./style";
 function Home() {
     const [data, setMovies] = useState([]);
     let [topRated, setTopRated] = useState([]);
-    let [nowPlayingMovies, setPlayingMovies] = useState([]);
     let [upComingMovies, setComingMovies] = useState([]);
+    let [trendMovies, setPlayingMovies] = useState([]);
     // search search
     let [searchKeyword, setSearchKeyword] = useState('');
 
     const results = get(data, 'results', []);
-    const PLAYINGMOVIES = get(nowPlayingMovies, 'results', []);
+    const TOPRATED = get(topRated, 'results', []);
     const COMINGMOVIES = get(upComingMovies, 'results', []);
-    const TOPRATED = get(nowPlayingMovies, 'results', []);
+    const TRENDMOVIES = get(trendMovies, 'results', []);
     useEffect(() => {
         getRequest('/movie/popular')
             .then(response => {
                 setMovies(response.data);
             });
-        callSlidersApi();
+
+        getRequest('/movie/top_rated')
+            .then(response => {
+                setTopRated(response.data);
+            });
+
+        getRequest('/movie/upcoming')
+            .then(response => {
+                setComingMovies(response.data);
+            });
+
+        getRequest('/trending/movie/day')
+            .then(response => {
+                setPlayingMovies(response.data);
+            });
     }, [])
     async function callSlidersApi() {
-        try {
-            topRated = await getRequest('/movie/top_rated');
-            upComingMovies = await getRequest('/movie/upcoming');
-            nowPlayingMovies = await getRequest('/movie/now_playing');
-        } catch (err) {
-            console.log(err);
-        } finally {
-            setTopRated(topRated.data);
-            setComingMovies(upComingMovies.data);
-            setPlayingMovies(nowPlayingMovies.data);
-        }
+
     }
     function renderFarm() {
         return (
@@ -45,23 +49,23 @@ function Home() {
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h3 className="py-2 text-capitalize"><b>Top Rated</b></h3>
-                        <Link className="px-2 px-sm-3" to={`/categories/${1}`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
+                        <Link className="px-2 px-sm-3" to={`/Top Rated`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
                     </div>
                     <MiniSlider data={TOPRATED} />
                 </div>
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h3 className="py-2 text-capitalize"><b>Upcoming</b></h3>
-                        <Link className="px-2 px-sm-3" to={`/categories/${1}`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
+                        <Link className="px-2 px-sm-3" to={`/Upcoming`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
                     </div>
                     <MiniSlider data={COMINGMOVIES} />
                 </div>
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
-                        <h3 className="py-2 text-capitalize"><b>Now playing</b></h3>
-                        <Link className="px-2 px-sm-3" to={`/categories/${1}`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
+                        <h3 className="py-2 text-capitalize"><b>trending</b></h3>
+                        <Link className="px-2 px-sm-3" to={`/trends`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
                     </div>
-                    <MiniSlider data={PLAYINGMOVIES} />
+                    <MiniSlider data={TRENDMOVIES} />
                 </div>
             </Fragment>
 

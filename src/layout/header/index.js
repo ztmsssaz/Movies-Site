@@ -60,11 +60,41 @@ function Header() {
                         <div className="col-2 d-flex align-items-center rtl">
                             {handleLoginButton()}
                             <div className="px-4">
-                                <Searching />
+                                <Searching id={1} />
                             </div>
                         </div>
                     </div>
                 </div>
+            </header>
+            <header className="mobileHeader py-1">
+                <nav className="navbar navbar-expand-lg navbar-dark">
+                    <div className="container-fluid">
+                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+                        <div className="logo navbar-brand mx-auto">
+                            <Link to="/"><img src="/logo.svg" alt="logo" /></Link>
+                        </div>
+                        <div className="rtl py-1">
+                            <div className="px-2">
+                                <Searching id={2} />
+                            </div>
+                        </div>
+                        <div className="collapse navbar-collapse col-10" id="navbarToggler">
+                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li className="nav-item">
+                                    <Link className="p-2 nav-link active" aria-current="page" to="/">Home</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="p-2" to="/search">Search</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="p-2" to="/categories">Categories</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
             </header>
         </Style>
     )

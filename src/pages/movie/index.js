@@ -31,7 +31,6 @@ function SeeMovie() {
         window.scrollTo(0, 0)
         getRequest(`/movie/${id}`)
             .then(response => {
-                console.log(response);
                 setMovieData(response.data);
             })
         getRequest(`/movie/${id}/videos`)
@@ -59,7 +58,7 @@ function SeeMovie() {
 
     }
     function renderFarm() {
-        if (movieInfo.overview) {
+        if (movieInfo.original_title) {
             return (
                 <div className="backgroundMovie" style={{ backgroundImage: movieInfo.backdrop_path ? `url(${backgroundMovieBaseUrl}${movieInfo.backdrop_path})` : 'none' }}>
                     <div className="backgroundDrop py-md-5">

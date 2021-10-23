@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import { getRequest } from "../../api";
 import { posterBaseUrl } from '../../constance';
 import { defaultImage, textDots } from '../../helpers';
+import PropTypes from 'prop-types';
 import Style from "./style";
 
-function Searching() {
+function Searching(props) {
     const [inputValue, setInputValue] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-
+    const { id } = props;
     useEffect(() => {
         if (inputValue.length >= 2) {
             getRequest(`/search/movie?query=${inputValue}`)
@@ -20,7 +21,7 @@ function Searching() {
         } else if (inputValue.length === 0) {
             setInputValue('');
         }
-        var myOffcanvas = document.getElementById('offcanvasTop')
+        var myOffcanvas = document.getElementById(`offcanvasTop-${id}`)
         myOffcanvas.addEventListener('hidden.bs.offcanvas', function () {
             setSearchResults([]);
             setInputValue('')
@@ -66,10 +67,10 @@ function Searching() {
     }
     return (
         <Style>
-            <div className="col-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+            <div className="col-1" type="button" data-bs-toggle="offcanvas" data-bs-target={`#offcanvasTop-${id}`} aria-controls="offcanvasTop">
                 <FontAwesomeIcon className="text-light" icon={faSearch} />
             </div>
-            <div className="offcanvas offcanvas-top" tabIndex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+            <div className="offcanvas offcanvas-top" tabIndex="-1" id={`offcanvasTop-${id}`} aria-labelledby="offcanvasTopLabel">
                 <div className="offcanvas-header justify-content-center align-items-center">
                     <h5 id="offcanvasTopLabel">Search Movie</h5>
                     <button type="button" className="mb-1 mx-2 btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -85,5 +86,8 @@ function Searching() {
 
         </Style>
     )
+}
+Searching.propTypes = {
+    id: PropTypes.number.isRequired,
 }
 export default Searching;

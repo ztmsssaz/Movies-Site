@@ -41,5 +41,24 @@ header.mainHeader{
         }
     }
 }
+header.mobileHeader{
+    display: none;
+}
+@media (max-width:992px){
+    header.mainHeader{
+        display: none;
+    }
+    header.mobileHeader{
+        position: absolute;
+        display: block;
+        width: 100%;
+        z-index:100;
+        top:0;
+        background-color: ${theme.background};
+        .logo{
+            max-width: 180px;
+        }
+}
+}
 `
 export default Style;

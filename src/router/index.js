@@ -6,6 +6,7 @@ import Loader from "../components/loader";
 import Layout from '../layout';
 
 const Login = lazy(() => import("../pages/auth/login"));
+const Page404 = lazy(() => import("../pages/Page404"));
 const Home = lazy(() => import("../pages/home"));
 const AboutUS = lazy(() => import("../pages/about-us"));
 const SeeMovie = lazy(() => import("../pages/movie"));
@@ -23,6 +24,9 @@ function MainRouter() {
                     <Switch>
                         <PublicRoute isLogin={isLogin} path="/" exact>
                             <Home />
+                        </PublicRoute>
+                        <PublicRoute isLogin={isLogin} path="/page404" exact>
+                            <Page404 />
                         </PublicRoute>
                         <PublicRoute isLogin={isLogin} path="/about-us" exact>
                             <AboutUS />

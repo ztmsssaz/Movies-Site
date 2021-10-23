@@ -7,6 +7,7 @@ const theme = {
 }
 const Style = styled.div`
 .movieDetails{
+    min-height: 460px;
     .backgroundMovie{
     background-size:cover;
     background-repeat:no-repeat;

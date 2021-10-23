@@ -1,4 +1,5 @@
 import { create } from 'apisauce';
+import { useHistory } from 'react-router-dom';
 import {
     HTTP_STATUS_CODE_OK,
     HTTP_STATUS_CODE_CREATED,
@@ -16,9 +17,9 @@ import {
 const api = create({ baseURL: 'https://murmuring-tundra-31743.herokuapp.com/movies/3/', params: PARAMS });
 
 function errorHandling(response) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-
-
+    if (response.status === 404) {
+        window.location.href = '/page404';
+    }
 }
 
 api.addResponseTransform((response) => {
