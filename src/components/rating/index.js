@@ -1,18 +1,11 @@
-import { useEffect } from "react";
 import { postRequest } from '../../api';
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactStars from "react-rating-stars-component";
 import { Style } from "./style";
-import { useAuthState } from "../../context";
 
 function RatingMovie(props) {
     const { movieId } = props;
-    const userInfo = useAuthState();
-    console.log(userInfo);
-    useEffect(() => {
-
-    }, [])
 
     function rateMovie(value) {
         postRequest(`/movie/${movieId}/rating`, { value })

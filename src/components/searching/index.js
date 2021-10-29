@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getRequest } from "../../api";
-import { posterBaseUrl } from '../../constance';
+import { posterBaseUrl } from '../../conctant';
 import { defaultImage, textDots } from '../../helpers';
 import PropTypes from 'prop-types';
 import Style from "./style";
@@ -13,25 +13,30 @@ function Searching(props) {
     const [searchResults, setSearchResults] = useState([]);
     const { id } = props;
     useEffect(() => {
-        if (inputValue.length >= 2) {
-            getRequest(`/search/movie?query=${inputValue}`)
+        if (inputValue.length >= 1) {
+            getRequest(`/search/multi?query=${inputValue}`)
                 .then(res => {
                     setSearchResults(res.data.results);
                 })
         } else if (inputValue.length === 0) {
             setInputValue('');
         }
+    }, [inputValue]);
+
+    useEffect(() => {
         var myOffcanvas = document.getElementById(`offcanvasTop-${id}`)
         myOffcanvas.addEventListener('hidden.bs.offcanvas', function () {
             setSearchResults([]);
             setInputValue('')
-        })
-    }, [inputValue])
+        });
+    })
+
     function searchHandler(e) {
         const value = e.target.value;
-        if (value.length >= 2) {
+        console.log(value);
+        if (value.length >= 1) {
             setInputValue(e.target.value)
-        } else {
+        } else if (value.length === 0) {
             setSearchResults([]);
             setInputValue('');
         }
@@ -77,7 +82,7 @@ function Searching(props) {
                 </div>
                 <div className="position-relative col-12 col-sm-10 col-md-6 mx-auto">
                     <input className="form-control text-center" placeholder="Search Movies here"
-                        onKeyUp={searchHandler} type="text" />
+                        value={inputValue} onChange={searchHandler} type="text" />
                     <div className="searchReasultsBox bg-light">
                         {renderFarm()}
                     </div>

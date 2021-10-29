@@ -123,7 +123,7 @@ a{
   background-color: ${theme.white};
   .active{
     background-color: ${theme.scoundry};
-    color:${theme.white}
+    color:${theme.white};
   }
   li{
     &:not(:last-child){
@@ -131,23 +131,34 @@ a{
     }
     display:flex;
     align-items:center;
-    &.previous a {
+    &:hover{
+      background-color: ${theme.primaryColor} !important;
+      color: #fff !important;
+      }
+    &.previous {
       border-radius:10px 0 0 10px;
-      min-width: 71px;
+      a{
+        min-width: 71px;
+      }
     }
-    &.next a {
+    &.next {
       border-radius:0 10px 10px 0;
-      min-width: 65px;
+      a {
+        min-width: 65px;
+      }
     }
     a {
       cursor: pointer;
       padding:10px 15px;
-      &:hover{
-        background-color: ${theme.primaryColor} !important;
-        color: #fff !important;
-      }
     }
   }
+}
+/* poster path default style */
+.posterPathBackground{
+  background-image: url('/images/background/picture-grey.svg');
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
 }
 `
 

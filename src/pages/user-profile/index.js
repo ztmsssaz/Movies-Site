@@ -1,23 +1,28 @@
 import { Link } from "react-router-dom";
 import { useAuthState } from '../../context';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getRequest } from "../../api";
 import CircleProgressbar from '../../components/circle-gauges';
 import Style from "./style";
-import { profileBaseUrl, gravatarBaseUrl } from '../../constance'
+import { profileBaseUrl, gravatarBaseUrl } from '../../conctant'
 
 function UserProfile() {
     const satateInfo = useAuthState();
     const [profileInfo, setProfileInfo] = useState({});
+    const mounted = useRef(false);
 
     useEffect(() => {
+        mounted.current = true;
+
         getRequest('/account', { session_id: satateInfo.sessionId })
             .then(res => {
                 if (res.status === 200) {
                     setProfileInfo(res.data);
                 }
             })
-    }, []);
+        return () => mounted.current = false;
+
+    }, [satateInfo]);
     function renderprofileImage() {
         if (profileInfo.avatar.tmdb.avatar_path) {
             return (

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { getRequest } from '../../api';
 import { MiniSlider, MainSlider } from '../../components/sliders';
@@ -8,21 +8,20 @@ import get from 'lodash/get';
 import Style from "./style";
 
 function Home() {
-    const [data, setMovies] = useState([]);
+    const [popularMovies, setPopularMovies] = useState([]);
     let [topRated, setTopRated] = useState([]);
     let [upComingMovies, setComingMovies] = useState([]);
     let [trendMovies, setPlayingMovies] = useState([]);
-    // search search
     let [searchKeyword, setSearchKeyword] = useState('');
+    let isMounted = useRef(false);
+    const POPULARMOVIES = get(popularMovies, 'results', []);
 
-    const results = get(data, 'results', []);
-    const TOPRATED = get(topRated, 'results', []);
-    const COMINGMOVIES = get(upComingMovies, 'results', []);
-    const TRENDMOVIES = get(trendMovies, 'results', []);
     useEffect(() => {
+        document.title = "Home";
+        isMounted.current = true;
         getRequest('/movie/popular')
             .then(response => {
-                setMovies(response.data);
+                setPopularMovies(response.data);
             });
 
         getRequest('/movie/top_rated')
@@ -39,40 +38,39 @@ function Home() {
             .then(response => {
                 setPlayingMovies(response.data);
             });
-    }, [])
-    async function callSlidersApi() {
+        return () => { isMounted.current = false };
+    }, []);
 
-    }
     function renderFarm() {
+        const TOPRATED = get(topRated, 'results', []);
+        const COMINGMOVIES = get(upComingMovies, 'results', []);
+        const TRENDMOVIES = get(trendMovies, 'results', []);
         return (
             <Fragment>
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h3 className="py-2 text-capitalize"><b>Top Rated</b></h3>
-                        <Link className="px-2 px-sm-3" to={`/Top Rated`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
+                        <Link className="px-2 px-sm-3" to={`/top-rated`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
                     </div>
-                    <MiniSlider data={TOPRATED} />
+                    <MiniSlider type={'movie'} data={TOPRATED} />
                 </div>
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h3 className="py-2 text-capitalize"><b>Upcoming</b></h3>
-                        <Link className="px-2 px-sm-3" to={`/Upcoming`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
+                        <Link className="px-2 px-sm-3" to={`/upcoming`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
                     </div>
-                    <MiniSlider data={COMINGMOVIES} />
+                    <MiniSlider type={'movie'} data={COMINGMOVIES} />
                 </div>
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h3 className="py-2 text-capitalize"><b>trending</b></h3>
                         <Link className="px-2 px-sm-3" to={`/trends`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
                     </div>
-                    <MiniSlider data={TRENDMOVIES} />
+                    <MiniSlider type={'movie'} data={TRENDMOVIES} />
                 </div>
             </Fragment>
 
         )
-    }
-    function search(el) {
-        setSearchKeyword(el.target.value);
     }
     return (
         <Style>
@@ -86,7 +84,7 @@ function Home() {
                         <div className="searchForm mx-auto">
                             <form name="search" className="position-relative mt-5">
                                 <input type="text" className="form-control py-2 rounded-pill" placeholder="Search for a movie ...."
-                                    onKeyUp={search} />
+                                    onChange={el => setSearchKeyword(el.target.value)} />
                                 <Link to={`/search?query=${searchKeyword}`}>
                                     <button type="submit" className="btn btn-primary py-2 rounded-pill">
                                         Search
@@ -100,7 +98,7 @@ function Home() {
             <section>
                 <div className="py-5 mainSliders container">
                     <h4 className="px-2 py-2">What's Popular</h4>
-                    <MainSlider data={results} />
+                    <MainSlider data={POPULARMOVIES} />
                 </div>
             </section>
             <section className="miniSliders">

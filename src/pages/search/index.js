@@ -1,8 +1,7 @@
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { getRequest } from '../../api';
 import { Fragment, useEffect, useState } from "react";
-import { posterBaseUrl } from '../../constance';
-import { defaultImage } from '../../helpers';
+import MovieList from '../../components/movies-list';
 import ReactPaginate from "react-paginate";
 import queryString from 'query-string';
 import Style from "./style";
@@ -15,32 +14,23 @@ function Search() {
     const [with_genres, setWith_genres] = useState('');
     const [searchInput, setSearchInput] = useState(PARAMS.query);
     const [page, setPage] = useState(1);
+    document.title = "Search";
 
     useEffect(() => {
         if (PARAMS.query) {
-            getRequest('/search/movie', { query: queryString.parse(search).query || ' ', page })
+            getRequest('/search/multi', { query: queryString.parse(search).query || ' ', page })
                 .then((res) => {
                     setMovies(res.data);
                 })
         }
+        // eslint-disable-next8-line react-hooks/exhaustive-deps
     }, [search, page]);
 
     function searchRenderFarm() {
         const { results } = moviesInfo;
         if (results.length > 0) {
             return (
-                results.map(item => {
-                    return (
-                        <div key={item.id} className="movieBox my-2 col-5 col-sm-2">
-                            <Link className="text-dark shadow bg-white rounded-3 mx-2" to={`/movie/${item.id}`}>
-                                <div>
-                                    <img className="rounded-3" src={`${posterBaseUrl}${item.poster_path}`} onError={defaultImage} alt="" />
-                                </div>
-                                <h5 className="p-2 text-center text-truncate">{item.title || item.original_title}</h5>
-                            </Link>
-                        </div>
-                    )
-                })
+                <MovieList moviesInfo={moviesInfo} />
             )
         } else if (searchInput) {
             return (
@@ -111,7 +101,8 @@ function Search() {
             </Fragment>
         )
     }
-    function updateQueryParams(value) {
+    function updateQueryParams(e) {
+        var value = e.target.value;
         setSearchInput(value);
         if (!value) {
             setMovies({ results: [] });
@@ -124,14 +115,14 @@ function Search() {
                 <section className="searchForm col-10 mx-auto">
                     <form name="search" className="position-relative pt-2 mb-2" onSubmit={e => e.preventDefault()}>
                         <input value={searchInput} type="text" className="form-control py-2 rounded-pill" placeholder="Search for a movie ....."
-                            onChange={e => updateQueryParams(e.target.value)} />
+                            onChange={updateQueryParams} />
                         <button type="button" className="btn btn-primary mt-2 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#filters">
                             Filters
                         </button>
                     </form>
                     {renderFilter()}
                 </section>
-                <section className="d-flex flex-wrap justify-content-center">
+                <section>
                     {searchRenderFarm()}
                 </section>
                 <section className="mx-auto py-4">

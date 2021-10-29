@@ -1,9 +1,9 @@
-import React, { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom'
 import CircleProgressbar from '../../circle-gauges';
-import { posterBaseUrl } from '../../../constance';
-import { textDots } from '../../../helpers'
+import { posterBaseUrl } from '../../../conctant';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import PropTypes from 'prop-types';
 import SwiperCore, {
     Navigation, EffectCube,
 } from "swiper";
@@ -15,12 +15,8 @@ SwiperCore.use([
     Navigation,
 ]);
 
-export default function MiniSlider(props) {
-    const { data = [] } = props;
-
-    useEffect(() => {
-
-    }, [props])
+function MiniSlider(props) {
+    const { data = [], type } = props;
     function defaultImage(el) {
         el.target.src = "/images/unkown-poster.jpg";
     }
@@ -29,15 +25,16 @@ export default function MiniSlider(props) {
             data.map((item, index) => {
                 return (
                     <SwiperSlide key={item.id}>
-                        <Link className="text-dark shadow-sm rounded-15 m-1" to={`/movie/${item.id}`}>
+                        <Link className="text-dark shadow-sm rounded-15 m-1" to={`/${type}/${item.id}`}>
                             <div className="position-relative">
-                                <img src={`${posterBaseUrl}${item.poster_path}`} alt={item.original_title} onError={defaultImage} />
+                                <img className='posterPathBackground' src={`${posterBaseUrl}${item.poster_path}`} alt={item.original_title || item.original_name || item.name} onError={defaultImage} />
                                 <div className="miniSliderGauge">
                                     <CircleProgressbar fontSize={32} value={(item.vote_average * 10)} width={40} />
                                 </div>
                             </div>
-                            <h6 className="text-center px-1 pt-4 text-truncate" title={item.original_title}><b><small>{(item.original_title)}</small></b></h6>
-                            <div className="text-center pb-2">{item.release_date.split('-')[0]}</div>
+                            <h6 className="text-center px-1 pt-4 text-truncate" title={item.original_title || item.original_name || item.name}><b><small>{(item.original_title || item.original_name || item.name)}</small></b></h6>
+                            {item.release_date && <div className="text-center pb-2">{item.release_date.split('-')[0] || ""}</div>}
+                            {item.first_air_date && <div className="text-center pb-2">{item.first_air_date.split('-')[0] || ""}</div>}
                         </Link>
                     </SwiperSlide>
                 )
@@ -61,10 +58,6 @@ export default function MiniSlider(props) {
                             slidesPerView: 7,
                             slidesPerGroup: 7
                         },
-                        768: {
-                            slidesPerView: 6,
-                            slidesPerGroup: 6
-                        },
                         640: {
                             slidesPerView: 5,
                             slidesPerGroup: 5
@@ -82,9 +75,12 @@ export default function MiniSlider(props) {
                     {renderFarm()}
                     <div style={{ height: '35px' }}></div>
                 </Swiper>
-                {/* <div className="prev bg-danger text-white" >prev</div>
-                <div className="next bg-dark text-white" >next</div> */}
             </Style>
         </Fragment >
     );
 };
+MiniSlider.propTypes = {
+    data: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired,
+};
+export default MiniSlider;

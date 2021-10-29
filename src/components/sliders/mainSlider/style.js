@@ -9,11 +9,8 @@ const Style = styled.div`
     max-width:270px;
     margin: 0 auto;
     img{
-        min-height: 170px;
-        background:url('/images/background/picture-grey.svg');
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
+        min-height: 80px;
+        min-width: 130px;
     }
 }
 .swiper-pagination{

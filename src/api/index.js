@@ -1,5 +1,4 @@
 import { create } from 'apisauce';
-import { useHistory } from 'react-router-dom';
 import {
     HTTP_STATUS_CODE_OK,
     HTTP_STATUS_CODE_CREATED,
@@ -11,7 +10,7 @@ import {
     HTTP_STATUS_CODE_SERVER_ERROR,
     HTTP_STATUS_CODE_UNPROCESSABLE_ENTITY,
     PARAMS
-} from './constance';
+} from './constant';
 
 // define the api
 const api = create({ baseURL: 'https://murmuring-tundra-31743.herokuapp.com/movies/3/', params: PARAMS });
@@ -62,12 +61,12 @@ api.addResponseTransform((response) => {
             errorHandling(response);
             break;
         default:
-            throw new Error('Unhandled error in API');
+        // throw new Error('Unhandled error in API');
     }
 });
 
 export async function getRequest(url, params = PARAMS) {
-    return api.get(url, params);
+    return await api.get(url, params);
 }
 export async function postRequest(url, body) {
     return api.post(url, body);

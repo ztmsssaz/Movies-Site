@@ -15,6 +15,7 @@ function Login() {
     let history = useHistory();
     const dispatch = useAuthDispatch();
     useEffect(() => {
+        document.title = "Login";
         getRequest('/authentication/token/new?api_key=4ba2c80bd43f2892ecb3349fa445015f')
             .then(response => {
                 if (response) {

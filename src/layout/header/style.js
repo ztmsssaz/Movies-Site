@@ -44,7 +44,7 @@ header.mainHeader{
 header.mobileHeader{
     display: none;
 }
-@media (max-width:992px){
+@media (max-width:991px){
     header.mainHeader{
         display: none;
     }
@@ -57,6 +57,9 @@ header.mobileHeader{
         background-color: ${theme.background};
         .logo{
             max-width: 180px;
+        }
+        .offcanvas#leftNavbar{
+            max-width: 270px;
         }
 }
 }

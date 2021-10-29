@@ -18,6 +18,15 @@ export function textDots(string, numberOfChar = 15) {
 export function toHours(totalMinutes) {
     var hours = Math.floor(totalMinutes / 60);
     var minutes = totalMinutes % 60;
+    if (!hours && !minutes) {
+        return '';
+    }
+    if (!hours && minutes) {
+        return (`${minutes}m`);
+    }
+    if (hours && !minutes) {
+        return (`${hours}h`);
+    }
     return (`${hours}h ${minutes}m`);
 }
 export function defaultImage(el) {

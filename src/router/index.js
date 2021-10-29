@@ -9,7 +9,8 @@ const Login = lazy(() => import("../pages/auth/login"));
 const Page404 = lazy(() => import("../pages/Page404"));
 const Home = lazy(() => import("../pages/home"));
 const AboutUS = lazy(() => import("../pages/about-us"));
-const SeeMovie = lazy(() => import("../pages/movie"));
+const SeeMovie = lazy(() => import("../pages/movies/movie"));
+const TVShows = lazy(() => import("../pages/movies/tv-shows"));
 const UserProfile = lazy(() => import("../pages/user-profile"));
 const Search = lazy(() => import("../pages/search"));
 const Categories = lazy(() => import("../pages/categories"));
@@ -25,14 +26,14 @@ function MainRouter() {
                         <PublicRoute isLogin={isLogin} path="/" exact>
                             <Home />
                         </PublicRoute>
-                        <PublicRoute isLogin={isLogin} path="/page404" exact>
-                            <Page404 />
-                        </PublicRoute>
                         <PublicRoute isLogin={isLogin} path="/about-us" exact>
                             <AboutUS />
                         </PublicRoute>
                         <PublicRoute isLogin={isLogin} path="/movie/:id" exact>
                             <SeeMovie />
+                        </PublicRoute>
+                        <PublicRoute isLogin={isLogin} path="/tv/:id" exact>
+                            <TVShows />
                         </PublicRoute>
                         <PublicRoute isLogin={isLogin} path="/search" exact>
                             <Search />
@@ -40,15 +41,21 @@ function MainRouter() {
                         <PublicRoute isLogin={isLogin} path="/categories" exact>
                             <Categories />
                         </PublicRoute>
-                        <PublicRoute isLogin={isLogin} path="/categories/:name/:id" exact>
+                        <PublicRoute isLogin={isLogin} path="/categories/:type/:name/:id" exact>
                             <ShowCategory />
                         </PublicRoute>
                         <PublicRoute isLogin={isLogin} path="/login" restricted={true} exact>
                             <Login />
                         </PublicRoute>
+                        <PublicRoute isLogin={isLogin} path="/page404" exact>
+                            <Page404 />
+                        </PublicRoute>
                         <PrivateRoute isLogin={isLogin} path="/profile" exact>
                             <UserProfile />
                         </PrivateRoute>
+                        <PublicRoute isLogin={isLogin}>
+                            <Page404 />
+                        </PublicRoute>
                     </Switch>
                 </Layout>
             </Suspense>

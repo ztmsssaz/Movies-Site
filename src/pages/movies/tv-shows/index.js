@@ -1,99 +1,84 @@
-// import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
-import { getRequest } from '../../api';
-import { posterBaseUrl, backgroundMovieBaseUrl, galleryMovieBaseUrl } from "../../constance";
-import { toHours, defaultImage } from '../../helpers';
-import { faHeart, faBookmark, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Link, useParams } from "react-router-dom";
+import { getRequest } from '../../../api';
+import { posterBaseUrl, backgroundMovieBaseUrl, galleryMovieBaseUrl } from "../../../conctant";
+import { toHours, defaultImage } from '../../../helpers';
+import { faHeart, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CircleProgressbar from '../../components/circle-gauges';
-import Rating from '../../components/rating';
-import MiniSlider from '../../components/sliders/miniSlider';
-import YoutubeEmbed from '../../components/youtube-embed';
-// import get from 'lodash/get';
-import Style from "./style";
+import CircleProgressbar from '../../../components/circle-gauges';
+import RatingMovie from '../../../components/rating';
+import MiniSlider from '../../../components/sliders/miniSlider';
+import YoutubeEmbed from '../../../components/youtube-embed';
+import Style from "../style";
 
-function SeeMovie() {
+function TVShows() {
     const { id } = useParams();
     const [movieInfo, setMovieData] = useState({});
     const [keyTrailer, setKeyTrailer] = useState({ results: [{ key: '' }] });
     const [similarMovies, setSimilarMovies] = useState({ results: [] });
     const [movieImages, setMovieImages] = useState({ backdrops: [] });
     const [modalImage, setModalImage] = useState('');
-    const [location, setLocation] = useState('');
-    const [marked, setMarked] = useState(false);
-    const history = useHistory();
-    history.listen((location) => {
-        setLocation(location);
-    })
 
     useEffect(() => {
-        window.scrollTo(0, 0)
-        getRequest(`/movie/${id}`)
+        window.scrollTo(0, 0);
+        getRequest(`/tv/${id}`)
             .then(response => {
                 setMovieData(response.data);
             })
-        getRequest(`/movie/${id}/videos`)
+        getRequest(`/tv/${id}/videos`)
             .then(response => {
-                console.log(response.data);
                 setKeyTrailer(response.data);
             })
-        getRequest(`/movie/${id}/similar`)
+        getRequest(`/tv/${id}/similar`)
             .then(response => {
                 setSimilarMovies(response.data);
             })
-        getRequest(`/movie/${id}/images`)
+        getRequest(`/tv/${id}/images`)
             .then(response => {
                 setMovieImages(response.data);
             })
-    }, [location]);
+    }, [id]);
 
-    function AddToFavoritesList() {
-        // getRequest(`/${mediaType}/${id}/similar`)
-        //     .then(response => {
-        //         setSimilarMovies(response.data);
-        //     })
-    }
-    function addToWatchList() {
+    useEffect(() => {
+        document.title = movieInfo.name || movieInfo.original_name;
+    }, [movieInfo]);
 
-    }
     function renderFarm() {
-        if (movieInfo.original_title) {
+        if (movieInfo.original_name) {
             return (
                 <div className="backgroundMovie" style={{ backgroundImage: movieInfo.backdrop_path ? `url(${backgroundMovieBaseUrl}${movieInfo.backdrop_path})` : 'none' }}>
                     <div className="backgroundDrop py-md-5">
                         <div className="container">
-                            <div className="d-flex justify-content-start flex-wrap flex-md-nowrap py-4 px-1 py-sm-4">
-                                <div className="col-9 col-md-2">
-                                    {<img className="img rounded-3" src={`${posterBaseUrl}${movieInfo.poster_path}`} onError={defaultImage} alt="ok" />}
+                            <div className="d-flex justify-content-start align-items-center flex-wrap flex-md-nowrap py-4 px-1">
+                                <div className="col-9 col-sm-5 col-xl-3">
+                                    {<img className="posterPathBackground rounded-3 mx-auto" src={`${posterBaseUrl}${movieInfo.poster_path}`} onError={defaultImage} alt="ok" />}
                                 </div>
-                                <div className="infoBox text-white justify-content-start ps-sm-1 ps-md-5">
+                                <div className="col-12 col-md-6 text-white justify-content-start ps-sm-1">
                                     <div>
-                                        <h2 className="mt-3 mt-sm-0">{movieInfo.title} <small className="text-light font-weight-normal">({movieInfo.release_date.split('-')[0]})</small></h2>
+                                        <h2 className="mt-4 mt-md-0">{movieInfo.name} <small className="text-light font-weight-normal">({movieInfo.first_air_date.split('-')[0]})</small></h2>
                                     </div>
                                     <div>
                                         <div className="d-flex align-items-center flex-wrap pb-2">
                                             {
                                                 movieInfo.genres.map(item => {
                                                     return (
-                                                        <Link key={`${movieInfo.id, item.id}`} className="btn-light mt-2 rounded-pill mx-1 px-2" to={`/categories/${item.name}/${item.id}`}> <small>{item.name}</small> </Link>
+                                                        <Link key={`${movieInfo.id}${item.id}`} className="btn-light mt-2 rounded-pill mx-1 px-2" to={`/categories/tv/${item.name}/${item.id}`}> <small>{item.name}</small> </Link>
                                                     )
                                                 })
                                             }
-                                            <span className="mt-2">{toHours(movieInfo.runtime)}</span>
+                                            <span className="mt-2">{toHours(movieInfo.episode_run_time)}</span>
                                         </div>
                                     </div>
                                     <div className="py-2 d-flex align-items-center">
-                                        <div className="d-flex">
+                                        <div className="d-flex align-items-center">
                                             <CircleProgressbar width={50} value={movieInfo.vote_average * 10} />
-                                            <b className="px-2">User <br /> Score</b>
+                                            <b className="px-2">User Score</b>
                                         </div>
                                         <div className="col-12 col-sm-2 d-flex justify-content-around">
-                                            <div className="mark-movie d-flex justify-content-center rounded-circle px-2"
-                                                onClick={AddToFavoritesList}>
-                                                <FontAwesomeIcon className={`h-100 ${marked ? "text-warning" : ""}`} icon={faHeart} />
+                                            <div className="mark-movie d-flex justify-content-center rounded-circle px-2">
+                                                <FontAwesomeIcon className="h-100" icon={faHeart} />
                                                 <div className="rating d-flex justify-content-center py-2">
-                                                    <Rating movieId={movieInfo.id} />
+                                                    <RatingMovie movieId={movieInfo.id} />
                                                 </div>
                                             </div>
                                         </div>
@@ -109,7 +94,7 @@ function SeeMovie() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
             )
         }
     }
@@ -118,8 +103,8 @@ function SeeMovie() {
     }
     function gallery_RenderFarm() {
         return (
-            movieImages.backdrops.map((item, index) => {
-                if (item.file_path) {
+            movieImages.backdrops.filter(item => item.file_path)
+                .map((item, index) => {
                     return (
                         <div key={`${item.file_path}`} index={index} onClick={seeGalleryImage} className="galleryImage col-6 col-md-4" type="button" data-bs-toggle="modal" data-bs-target="#seeGalleryImage" >
                             <div className="m-1 rounded" >
@@ -127,19 +112,17 @@ function SeeMovie() {
                             </div>
                         </div>
                     )
-                }
-
-            })
+                })
         )
     }
     function similarMovies_RenderFarm() {
-        if (similarMovies) {
+        if (similarMovies.results.length > 0) {
             return (
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h3 className="py-2 text-capitalize"><b>Similar Movies</b></h3>
                     </div>
-                    <MiniSlider data={similarMovies.results} />
+                    <MiniSlider type={'tv'} data={similarMovies.results} />
                 </div>
             )
         }
@@ -151,8 +134,8 @@ function SeeMovie() {
             </section>
             <section className="container">
                 {movieImages.backdrops.length > 0 &&
-                    <div>
-                        <h3>Gallery</h3>
+                    <div className="py-4">
+                        <h3>Backdrops</h3>
                         <div className="d-flex flex-wrap">
                             {gallery_RenderFarm()}
                         </div>
@@ -183,4 +166,4 @@ function SeeMovie() {
         </Style>
     )
 }
-export default SeeMovie;
+export default TVShows;

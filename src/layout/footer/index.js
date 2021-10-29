@@ -49,8 +49,17 @@ function Footer() {
                             <li className="col-1"><a href="https://github.com/ztmsssaz" rel="noreferrer follow" target="_blank"><FontAwesomeIcon rel="noreferrer follow" icon={faGithub} /></a></li>
                         </ul>
                     </div>
-                    <div className="text-center my-3">
-                        <a className="w-25 mx-auto" href="https://iamabolfazl.ir" rel="noreferrer follow" target="_blank"><small>By @ztmsssaz</small></a>
+                    <div className="copyright text-center my-2 text-white-50">
+                        <p>
+                            <span> © Copyright 2021 - </span>
+                            <a className="mx-auto d-inline-block" href="#mysite" rel="noreferrer follow"> My Movies. </a>
+                        </p>
+                        <p>
+                            <span> Designed and built by </span>
+                            <a className="mx-auto d-inline-block" href="https://iamabolfazl.ir" rel="noreferrer follow" target="_blank"> Abolfazl </a>
+                            <span> ,data provided by </span>
+                            <a className="mx-auto d-inline-block" href="https://www.themoviedb.org" rel="noreferrer follow" target="_blank"> TMDb </a>
+                        </p>
                     </div>
                 </div>
             </footer>

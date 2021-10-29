@@ -22,7 +22,8 @@ const Style = styled.div`
     }
     img{
         max-width:250px;
-        margin:0 auto;
+        min-width:250px;
+        min-height:375px;
     }
     .mark-movie{
         width:40px;

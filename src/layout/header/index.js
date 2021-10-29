@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Searching from '../../components/searching'
 import { useAuthState, logOut, useAuthDispatch } from "../../context";
 import Style from "./style";
@@ -7,9 +7,10 @@ function Header() {
     const authState = useAuthState();
     const dispatch = useAuthDispatch();
 
-    function logout() {
-        logOut(dispatch);
+    function closeNavbar() {
+        document.getElementById('closeLeftNavbar').click();
     }
+
     function handleLoginButton() {
         if (!authState.sessionId) {
             return (
@@ -33,7 +34,7 @@ function Header() {
                         <li><Link to="/lists" className="dropdown-item">Lists</Link></li>
                         <li><Link to="/favorites" className="dropdown-item">Favorites</Link></li>
                         <li><Link to="/ratings" className="dropdown-item border-bottom">Ratings</Link></li>
-                        <li><a href="/" onClick={logout} className="dropdown-item">Logout</a></li>
+                        <li><a href="/" onClick={e => logOut(dispatch)} className="dropdown-item">Logout</a></li>
                     </ul>
                 </div>
             )
@@ -69,7 +70,7 @@ function Header() {
             <header className="mobileHeader py-1">
                 <nav className="navbar navbar-expand-lg navbar-dark">
                     <div className="container-fluid">
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                        <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#leftNavbar" aria-controls="leftNavbar">
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="logo navbar-brand mx-auto">
@@ -80,22 +81,31 @@ function Header() {
                                 <Searching id={2} />
                             </div>
                         </div>
-                        <div className="collapse navbar-collapse col-10" id="navbarToggler">
-                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    </div>
+                </nav>
+                <div className="offcanvas offcanvas-start" tabIndex="-1" id="leftNavbar" aria-labelledby="navbarLabel">
+                    <div className="offcanvas-header">
+                        <h5 className="offcanvas-title" id="navbarLabel">Menu</h5>
+                        <button id="closeLeftNavbar" type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div className="offcanvas-body small">
+                        <div>
+                            <ul className="navbar-nav me-auto mb-2 mb-lg-0" onClick={closeNavbar}>
                                 <li className="nav-item">
-                                    <Link className="p-2 nav-link active" aria-current="page" to="/">Home</Link>
+                                    <NavLink exact={true} activeClassName='text-primary' className="p-2" aria-current="page" to="/">Home</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="p-2" to="/search">Search</Link>
+                                    <NavLink exact={true} activeClassName='text-primary' className="p-2" to="/search">Search</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="p-2" to="/categories">Categories</Link>
+                                    <NavLink exact={true} activeClassName='text-primary' className="p-2" to="/categories">Categories</NavLink>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                </nav>
+                </div>
             </header>
+
         </Style>
     )
 }

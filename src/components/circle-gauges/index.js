@@ -23,7 +23,7 @@ function CircleProgressbar(props) {
     }
     useEffect(() => {
         chooseGaugeColor();
-    }, []);
+    });
     return (
         <div style={{ width: width ? `${width}px` : '80px' }}>
             <CircularProgressbar value={value} maxValue={100} text={`${value}%`} background={true} backgroundPadding={5} strokeWidth={5} styles={buildStyles(

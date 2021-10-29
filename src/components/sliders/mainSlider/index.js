@@ -1,12 +1,11 @@
-import 'swiper/swiper-bundle.min.css';
-import 'swiper/swiper.min.css';
 import Style from "./style";
-import React, { useEffect, useState } from 'react';
-import CircleProgressbar from '../../circle-gauges'
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { posterBaseUrl } from '../../../conctant';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { posterBaseUrl } from '../../../constance';
 import Loading from '../../loading';
-
+import PropTypes from 'prop-types';
+import CircleProgressbar from '../../circle-gauges'
 import SwiperCore, {
     Navigation,
     Pagination,
@@ -15,7 +14,8 @@ import SwiperCore, {
     EffectCube,
     Autoplay,
 } from "swiper";
-import { Link } from 'react-router-dom';
+import 'swiper/swiper-bundle.min.css';
+import 'swiper/swiper.min.css';
 
 SwiperCore.use([
     EffectCoverflow,
@@ -25,8 +25,8 @@ SwiperCore.use([
     Pagination,
     Autoplay,
 ]);
-export default function MainSlider(props) {
-    const { data } = props;
+function MainSlider(props) {
+    const { data = [] } = props;
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -35,7 +35,8 @@ export default function MainSlider(props) {
         } else {
             setLoading(true);
         }
-    }, [props])
+    }, [data]);
+
     const imageDefault = (el) => {
         el.target.src = '/images/unkown-poster.jpg';
         console.log(el.target.src);
@@ -47,7 +48,7 @@ export default function MainSlider(props) {
                     <SwiperSlide key={item.id}>
                         <div className="slideSize">
                             <Link className="position-relative" to={`/movie/${item.id}`}>
-                                <img src={`${posterBaseUrl}${item.poster_path}`} onError={imageDefault} alt={item.original_title} />
+                                <img className='posterPathBackground' src={`${posterBaseUrl}${item.poster_path}`} onError={imageDefault} alt={item.original_title} />
                                 <div className="mainSliderGauge">
                                     <CircleProgressbar value={item.vote_average * 10} width={50} />
                                 </div>
@@ -86,3 +87,7 @@ export default function MainSlider(props) {
         </Style>
     );
 };
+MainSlider.propTypes = {
+    data: PropTypes.array.isRequired,
+};
+export default MainSlider;

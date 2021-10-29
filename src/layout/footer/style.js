@@ -28,6 +28,11 @@ footer{
     a:hover{
         color:${theme.white}
     }
+    .copyright {
+        p{
+            font-size: 0.8rem;
+        }
+    }
 }
 `
 export default Style;
