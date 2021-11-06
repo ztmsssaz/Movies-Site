@@ -128,7 +128,7 @@ function TVShows() {
         }
     }
     return (
-        <Style>
+        <Style className="bg-red">
             <section className="movieDetails">
                 {renderFarm()}
             </section>

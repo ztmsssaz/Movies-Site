@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import get from 'lodash/get';
 import Style from "./style";
 
-function Home() {
+function Home(props) {
+    console.log(props);
     const [popularMovies, setPopularMovies] = useState([]);
     let [topRated, setTopRated] = useState([]);
     let [upComingMovies, setComingMovies] = useState([]);
@@ -84,7 +85,7 @@ function Home() {
                         <div className="searchForm mx-auto">
                             <form name="search" className="position-relative mt-5">
                                 <input type="text" className="form-control py-2 rounded-pill" placeholder="Search for a movie ...."
-                                    onChange={el => setSearchKeyword(el.target.value)} />
+                                    value={searchKeyword} onChange={el => setSearchKeyword(el.target.value)} />
                                 <Link to={`/search?query=${searchKeyword}`}>
                                     <button type="submit" className="btn btn-primary py-2 rounded-pill">
                                         Search

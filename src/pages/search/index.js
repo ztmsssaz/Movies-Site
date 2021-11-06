@@ -114,8 +114,8 @@ function Search() {
             <div className="container">
                 <section className="searchForm col-10 mx-auto">
                     <form name="search" className="position-relative pt-2 mb-2" onSubmit={e => e.preventDefault()}>
-                        <input value={searchInput} type="text" className="form-control py-2 rounded-pill" placeholder="Search for a movie ....."
-                            onChange={updateQueryParams} />
+                        <input type="text" className="form-control py-2 rounded-pill" placeholder="Search for a movie ....."
+                            value={searchInput} onChange={updateQueryParams} />
                         <button type="button" className="btn btn-primary mt-2 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#filters">
                             Filters
                         </button>

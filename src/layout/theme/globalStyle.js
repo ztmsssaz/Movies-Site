@@ -160,6 +160,10 @@ a{
   background-size: 50%;
   background-repeat: no-repeat;
 }
+/* white-space */
+.preLineSpace{
+  white-space:pre-line;
+}
 `
 
 export default GlobalStyle;

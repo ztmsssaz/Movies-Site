@@ -1,19 +1,21 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { loginUser, useAuthDispatch } from "../../../context";
 import { useHistory } from "react-router-dom";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getRequest } from '../../../api';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import './style.css';
 
-import './style.css'
 function Login() {
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
     const [passType, setPassType] = useState('password');
+    const [statusMessage, setStatusMessage] = useState('');
     const [requestToken, setRequestToken] = useState('');
     let history = useHistory();
     const dispatch = useAuthDispatch();
+
     useEffect(() => {
         document.title = "Login";
         getRequest('/authentication/token/new?api_key=4ba2c80bd43f2892ecb3349fa445015f')
@@ -23,11 +25,16 @@ function Login() {
                 }
             })
     }, [])
-    const handleLogin = async (e) => {
-        e.preventDefault();
+
+    const handleLogin = async (value) => {
         try {
-            const response = await loginUser(dispatch, { username, password, 'request_token': requestToken });
+            const response = await loginUser(dispatch, { ...value, 'request_token': requestToken });
+            console.log(response);
             if (!response.success) {
+                setStatusMessage(response.status_message);
+                setTimeout(() => {
+                    setStatusMessage('');
+                }, 5000);
                 return;
             }
             history.push('/');
@@ -35,6 +42,7 @@ function Login() {
             console.error(error);
         }
     };
+
     function handlePasswordType() {
         if (passType === 'password') {
             setPassType('text');
@@ -42,34 +50,53 @@ function Login() {
             setPassType('password')
         }
     }
+
     return (
-        <Fragment>
+        <Formik
+            initialValues={{ username: '', password: '' }}
+            validationSchema={Yup.object({
+                username: Yup.string()
+                    .max(15, 'Must be 15 characters or less')
+                    .required('Required'),
+                password: Yup.string()
+                    .max(20, 'Must be 20 characters or less')
+                    .required('Required'),
+            })}
+            onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                    handleLogin(values);
+                    setSubmitting(false);
+                }, 400);
+            }}
+        >
             <div className="container">
-                <div className="d-flex flex-column flex-grow-1 align-items-center justify-content-center vh-100">
+                <div className="d-flex flex-column flex-grow-1 align-items-center justify-content-center vh-75">
                     <h1 className="text-center my-4">Login</h1>
-                    <form className="col-12 col-sm-8 col-md-6 col-lg-4" name="login">
+                    <Form className="col-12 col-sm-8 col-md-6 col-lg-4" name="login">
                         <div className="text-left">
                             <div className="form-group py-1">
                                 <label htmlFor="username">Username</label>
-                                <input className="form-control" id="username" name="username" type="username" placeholder="username" autoComplete="username"
-                                    onChange={e => setUsername(e.target.value)} />
+                                <Field className="form-control" name="username" type="text" placeholder="username" autoComplete="username" />
+                                <ErrorMessage name="username" />
                             </div>
                             <div className="form-group py-1">
                                 <label htmlFor="password">Password</label>
                                 <div className="position-relative">
-                                    <input className="form-control" id="password" name="password" type={passType} placeholder="password" autoComplete="password"
-                                        onChange={e => setPassword(e.target.value)} />
+                                    <Field className="form-control" name="password" type={passType} placeholder="password" autoComplete="password" />
                                     <FontAwesomeIcon className="showPassword" icon={faEye} onClick={handlePasswordType} />
+                                    <ErrorMessage name="password" />
                                 </div>
                             </div>
                             <div>
-                                <button type="submit" className="btn btn-success w-100" onClick={handleLogin}>Login</button>
+                                <button type="submit" className="btn btn-success w-100">Login</button>
                             </div>
+                            <p className="text-danger py-2"><small>{statusMessage}</small></p>
                         </div>
-                    </form>
+                    </Form>
                 </div>
             </div>
-        </Fragment>
+        </Formik>
+
     );
 }
 

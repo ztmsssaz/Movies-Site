@@ -9,6 +9,7 @@ const Login = lazy(() => import("../pages/auth/login"));
 const Page404 = lazy(() => import("../pages/Page404"));
 const Home = lazy(() => import("../pages/home"));
 const AboutUS = lazy(() => import("../pages/about-us"));
+const Person = lazy(() => import("../pages/person"));
 const SeeMovie = lazy(() => import("../pages/movies/movie"));
 const TVShows = lazy(() => import("../pages/movies/tv-shows"));
 const UserProfile = lazy(() => import("../pages/user-profile"));
@@ -35,6 +36,9 @@ function MainRouter() {
                         <PublicRoute isLogin={isLogin} path="/tv/:id" exact>
                             <TVShows />
                         </PublicRoute>
+                        <PublicRoute isLogin={isLogin} path="/person/:id" exact>
+                            <Person />
+                        </PublicRoute>
                         <PublicRoute isLogin={isLogin} path="/search" exact>
                             <Search />
                         </PublicRoute>
@@ -59,7 +63,7 @@ function MainRouter() {
                     </Switch>
                 </Layout>
             </Suspense>
-        </BrowserRouter>
+        </BrowserRouter >
     )
 }
 export default MainRouter;

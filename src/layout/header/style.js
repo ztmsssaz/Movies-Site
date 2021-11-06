@@ -49,7 +49,7 @@ header.mobileHeader{
         display: none;
     }
     header.mobileHeader{
-        position: absolute;
+        position: fixed;
         display: block;
         width: 100%;
         z-index:100;

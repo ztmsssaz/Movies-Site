@@ -80,7 +80,7 @@ function Searching(props) {
                     <h5 id="offcanvasTopLabel">Search Movie</h5>
                     <button type="button" className="mb-1 mx-2 btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div className="position-relative col-12 col-sm-10 col-md-6 mx-auto">
+                <div className="position-relative col-12 col-sm-10 col-md-6 px-2 px-sm-0 mx-auto">
                     <input className="form-control text-center" placeholder="Search Movies here"
                         value={inputValue} onChange={searchHandler} type="text" />
                     <div className="searchReasultsBox bg-light">

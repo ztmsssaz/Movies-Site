@@ -22,23 +22,26 @@ function MiniSlider(props) {
     }
     function renderFarm() {
         return (
-            data.map((item, index) => {
-                return (
-                    <SwiperSlide key={item.id}>
-                        <Link className="text-dark shadow-sm rounded-15 m-1" to={`/${type}/${item.id}`}>
-                            <div className="position-relative">
-                                <img className='posterPathBackground' src={`${posterBaseUrl}${item.poster_path}`} alt={item.original_title || item.original_name || item.name} onError={defaultImage} />
-                                <div className="miniSliderGauge">
-                                    <CircleProgressbar fontSize={32} value={(item.vote_average * 10)} width={40} />
+            data.filter(item => item.poster_path || item.profile_path)
+                .map((item, index) => {
+                    return (
+                        <SwiperSlide key={item.id * index}>
+                            <Link className="text-dark shadow-sm bg-white rounded-15 m-1" to={`/${item.media_type || type}/${item.id}`}>
+                                <div className="position-relative">
+                                    <img className='posterPathBackground' src={`${posterBaseUrl}${item.poster_path || item.profile_path}`} alt={item.original_title || item.original_name || item.name} onError={defaultImage} />
+                                    {item.vote_average >= 0 && <div className="miniSliderGauge">
+                                        <CircleProgressbar fontSize={32} value={(item.vote_average * 10)} width={40} />
+                                    </div>}
                                 </div>
-                            </div>
-                            <h6 className="text-center px-1 pt-4 text-truncate" title={item.original_title || item.original_name || item.name}><b><small>{(item.original_title || item.original_name || item.name)}</small></b></h6>
-                            {item.release_date && <div className="text-center pb-2">{item.release_date.split('-')[0] || ""}</div>}
-                            {item.first_air_date && <div className="text-center pb-2">{item.first_air_date.split('-')[0] || ""}</div>}
-                        </Link>
-                    </SwiperSlide>
-                )
-            })
+                                <h6 className="text-center px-1 pt-4 text-truncate" title={item.original_title || item.original_name || item.name}><b><small>{(item.original_title || item.original_name || item.name)}</small></b></h6>
+                                {item.release_date && <div className="text-center pb-2">{item.release_date.split('-')[0] || ""}</div>}
+                                {item.first_air_date && <div className="text-center pb-2">{item.first_air_date.split('-')[0] || ""}</div>}
+                                {item.character && !item.first_air_date && !item.release_date && <p className="text-center text-truncate px-1 pb-2"><small>{item.character}</small></p>}
+                                {!item.first_air_date && !item.release_date && !item.character && <div className="text-center">&nbsp;</div>}
+                            </Link>
+                        </SwiperSlide>
+                    )
+                })
         )
     }
     return (
@@ -47,7 +50,7 @@ function MiniSlider(props) {
                 <Swiper
                     spaceBetween={5}
                     initialSlide={0}
-                    navigation={true}
+                    navigation={false}
                     speed={800}
                     breakpoints={{
                         1920: {
@@ -81,6 +84,6 @@ function MiniSlider(props) {
 };
 MiniSlider.propTypes = {
     data: PropTypes.array.isRequired,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.string,
 };
 export default MiniSlider;

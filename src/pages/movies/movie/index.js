@@ -17,6 +17,7 @@ function SeeMovie() {
     const [keyTrailer, setKeyTrailer] = useState({ results: [{ key: '' }] });
     const [similarMovies, setSimilarMovies] = useState({ results: [] });
     const [movieImages, setMovieImages] = useState({ backdrops: [] });
+    const [movieCredits, setMovieCredits] = useState({ cast: [] });
     const [modalImage, setModalImage] = useState('');
 
     useEffect(() => {
@@ -37,6 +38,10 @@ function SeeMovie() {
             .then(response => {
                 setMovieImages(response.data);
             })
+        getRequest(`/movie/${id}/credits`)
+            .then(response => {
+                setMovieCredits(response.data);
+            })
     }, [id]);
 
     useEffect(() => {
@@ -44,7 +49,7 @@ function SeeMovie() {
     }, [movieInfo]);
 
     function renderFarm() {
-        if (movieInfo.original_title) {
+        if (movieInfo.title || movieInfo.original_title) {
             return (
                 <div className="backgroundMovie" style={{ backgroundImage: movieInfo.backdrop_path ? `url(${backgroundMovieBaseUrl}${movieInfo.backdrop_path})` : 'none' }}>
                     <div className="backgroundDrop py-md-5">
@@ -127,6 +132,18 @@ function SeeMovie() {
             )
         }
     }
+    function creditMovies_RenderFarm() {
+        if (similarMovies.results.length > 0) {
+            return (
+                <div className="categorySliders px-3">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <h3 className="py-2 text-capitalize"><b>Top Billed Cast</b></h3>
+                    </div>
+                    <MiniSlider type={'person'} data={movieCredits.cast} />
+                </div>
+            )
+        }
+    }
     return (
         <Style>
             <section className="movieDetails">
@@ -153,6 +170,9 @@ function SeeMovie() {
                         </div>
                     </div>
                 </div>
+            </section>
+            <section className="container">
+                {creditMovies_RenderFarm()}
             </section>
             {keyTrailer.results.lengths && <section className="container">
                 <h3>Trailer</h3>

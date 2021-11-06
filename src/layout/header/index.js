@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { NavLink, Link } from "react-router-dom";
 import Searching from '../../components/searching'
 import { useAuthState, logOut, useAuthDispatch } from "../../context";
@@ -11,7 +12,7 @@ function Header() {
         document.getElementById('closeLeftNavbar').click();
     }
 
-    function handleLoginButton() {
+    function handleLoginButtonPC() {
         if (!authState.sessionId) {
             return (
                 <div>
@@ -40,6 +41,26 @@ function Header() {
             )
         }
     }
+    function handleLoginButtonMobile() {
+        if (!authState.sessionId) {
+            return (
+                <li className="nav-item">
+                    <NavLink exact={true} activeClassName='text-primary' className="p-2" to="/login">Login</NavLink>
+                </li>
+            )
+        } else {
+            return (
+                <Fragment>
+                    <li className="nav-item">
+                        <NavLink exact={true} activeClassName='text-primary' className="p-2" to="/profile">Profile</NavLink>
+                    </li>
+                    <li className="nav-item pt-4">
+                        <span className="text-secondary px-2" onClick={() => logOut(dispatch)}>Logout</span>
+                    </li>
+                </Fragment>
+            )
+        }
+    }
     return (
         <Style>
             <header className="mainHeader py-4 border-bottom">
@@ -59,7 +80,7 @@ function Header() {
                             </nav>
                         </div>
                         <div className="col-2 d-flex align-items-center rtl">
-                            {handleLoginButton()}
+                            {handleLoginButtonPC()}
                             <div className="px-4">
                                 <Searching id={1} />
                             </div>
@@ -100,12 +121,12 @@ function Header() {
                                 <li className="nav-item">
                                     <NavLink exact={true} activeClassName='text-primary' className="p-2" to="/categories">Categories</NavLink>
                                 </li>
+                                {handleLoginButtonMobile()}
                             </ul>
                         </div>
                     </div>
                 </div>
             </header>
-
         </Style>
     )
 }

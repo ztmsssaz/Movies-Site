@@ -4,3 +4,6 @@
     top: 50%;
     transform: translateY(-50%);
 }
+.vh-75{
+    min-height: 75vh;;
+}
