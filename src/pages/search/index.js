@@ -11,7 +11,7 @@ function Search() {
     const { search } = useLocation();
     const PARAMS = queryString.parse(search);
     const [moviesInfo, setMovies] = useState({ results: [] });
-    const [with_genres, setWith_genres] = useState('');
+    // const [with_genres, setWith_genres] = useState('');
     const [searchInput, setSearchInput] = useState(PARAMS.query);
     const [page, setPage] = useState(1);
     document.title = "Search";
@@ -56,15 +56,15 @@ function Search() {
         }
     }
 
-    function setGenresCheckbox(el) {
-        let checkbox = el.target;
-        console.log(checkbox.checked);
-        if (checkbox.checked === true) {
-            setWith_genres(`${with_genres}${checkbox.value},`);
-        } else {
-            setWith_genres(with_genres.replace(`${checkbox.value},`, ''));
-        }
-    }
+    // function setGenresCheckbox(el) {
+    //     let checkbox = el.target;
+    //     console.log(checkbox.checked);
+    //     if (checkbox.checked === true) {
+    //         setWith_genres(`${with_genres}${checkbox.value},`);
+    //     } else {
+    //         setWith_genres(with_genres.replace(`${checkbox.value},`, ''));
+    //     }
+    // }
 
     function renderFilter() {
         return (

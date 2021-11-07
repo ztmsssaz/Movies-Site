@@ -18,6 +18,7 @@ const Style = styled.div`
         left: 0;
         z-index: 2;
         padding: 0;
+        min-height:50vh;
     }
     .avatarUser{
         img{

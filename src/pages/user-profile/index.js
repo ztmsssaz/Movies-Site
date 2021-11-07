@@ -13,7 +13,6 @@ function UserProfile() {
 
     useEffect(() => {
         mounted.current = true;
-
         getRequest('/account', { session_id: satateInfo.sessionId })
             .then(res => {
                 if (res.status === 200) {
@@ -21,8 +20,8 @@ function UserProfile() {
                 }
             })
         return () => mounted.current = false;
-
     }, [satateInfo]);
+
     function renderprofileImage() {
         if (profileInfo.avatar.tmdb.avatar_path) {
             return (
@@ -38,7 +37,7 @@ function UserProfile() {
     return (
         <Style>
             <section className="userArea py-2 bg-image">
-                <div className="inner_content">
+                <div className="inner_content mt-3">
                     <div className="container">
                         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                             <div className="avatarUser">{profileInfo.avatar &&
@@ -57,6 +56,23 @@ function UserProfile() {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className="form">
+                            <form className="d-flex flex-wrap text-light">
+                                <div className="col-10 col-sm-4 m-3">
+                                    <label htmlFor="name" class="form-label">Name</label>
+                                    <input id="name" className="form-control" value="Abolfazl Zarei" placeholder="Name" readOnly />
+                                </div>
+                                <div className="col-10 col-sm-4 m-3">
+                                    <label htmlFor="email" class="form-label">Email</label>
+                                    <input id="email" className="form-control" value="zarei.mrabolfazl@gmail.com" placeholder="Email" readOnly />
+                                </div>
+                                <div className="col-10 col-sm-4 m-3">
+                                    <label htmlFor="nationalCode" class="form-label">National Code</label>
+                                    <input id="nationalCode" className="form-control" value="0640536433" placeholder="National Code" readOnly />
+                                </div>
+                            </form>
+                            <button className="auth-btn border-0 m-3">Logout</button>
                         </div>
                     </div>
                 </div>
