@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAuthState } from '../../context';
+import { useAuthState, logOut, useAuthDispatch } from '../../context';
 import { useEffect, useRef, useState } from "react";
 import { getRequest } from "../../api";
 import CircleProgressbar from '../../components/circle-gauges';
@@ -8,9 +8,10 @@ import { profileBaseUrl, gravatarBaseUrl } from '../../conctant'
 
 function UserProfile() {
     const satateInfo = useAuthState();
+    const dispatch = useAuthDispatch();
     const [profileInfo, setProfileInfo] = useState({});
-    const mounted = useRef(false);
 
+    const mounted = useRef(false);
     useEffect(() => {
         mounted.current = true;
         getRequest('/account', { session_id: satateInfo.sessionId })
@@ -72,7 +73,7 @@ function UserProfile() {
                                     <input id="nationalCode" className="form-control" value="0640536433" placeholder="National Code" readOnly />
                                 </div>
                             </form>
-                            <button className="auth-btn border-0 m-3">Logout</button>
+                            <button className="auth-btn border-0 m-3" onClick={() => logOut(dispatch)}>Logout</button>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuthState } from '../../context';
-import { faInstagram, faTwitter, faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faTwitter, faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Style from "./style";
 
@@ -43,7 +43,6 @@ function Footer() {
                     <div className="text-center">
                         <div className="mt-4 border-bottom"></div>
                         <ul className="d-flex justify-content-center col-12 flex-wrap pt-4">
-                            <li className="col-1"><a href="https://instagram.com/ztmsssaz" rel="noreferrer follow" target="_blank"><FontAwesomeIcon icon={faInstagram} /></a></li>
                             <li className="col-1"><a href="https://twitter.com/ztmsssaz" rel="noreferrer follow" target="_blank"><FontAwesomeIcon rel="noreferrer follow" icon={faTwitter} /></a></li>
                             <li className="col-1"><a href="https://linkedin.com/ztmsssaz" rel="noreferrer follow" target="_blank"><FontAwesomeIcon rel="noreferrer follow" icon={faLinkedin} /></a></li>
                             <li className="col-1"><a href="https://github.com/ztmsssaz" rel="noreferrer follow" target="_blank"><FontAwesomeIcon rel="noreferrer follow" icon={faGithub} /></a></li>
