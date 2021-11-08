@@ -1,10 +1,10 @@
+import { useEffect, useState, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { getRequest } from '../../api';
-import { Fragment, useEffect, useState } from "react";
 import MovieList from '../../components/movies-list';
+import Loading from "../../components/loading";
 import ReactPaginate from "react-paginate";
 import Style from "./style";
-import Loading from "../../components/loading";
 
 function Forks() {
     const HISTORY = useHistory();
@@ -12,8 +12,14 @@ function Forks() {
     const [moviesInfo, setMovies] = useState({ results: [] });
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
+    const mounted = useRef(false);
 
     useEffect(() => {
+        mounted.current = true;
+        if (name !== 'trending' && name !== 'upcoming' && name !== 'top_rated') {
+            HISTORY.push('/page404');
+            return () => mounted.current = false;
+        }
         document.title = name;
         setLoading(true);
         if (name === "trending") {

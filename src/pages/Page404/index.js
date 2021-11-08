@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Style from "./style";
 function Page404() {
+    document.title = "Not Found";
     return (
         <Style>
             <section className="container py-5">
