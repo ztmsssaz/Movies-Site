@@ -76,14 +76,14 @@ function Login() {
                             <div className="form-group py-1">
                                 <label htmlFor="username">Username</label>
                                 <Field className="form-control" name="username" type="text" placeholder="username" autoComplete="username" />
-                                <ErrorMessage name="username" />
+                                <p><small className="text-danger"><ErrorMessage name="username" /></small></p>
                             </div>
                             <div className="form-group py-1">
                                 <label htmlFor="password">Password</label>
                                 <div className="position-relative">
                                     <Field className="form-control" name="password" type={passType} placeholder="password" autoComplete="password" />
                                     <FontAwesomeIcon className="showPassword" icon={faEye} onClick={handlePasswordType} />
-                                    <ErrorMessage name="password" />
+                                    <p><small className="text-danger"><ErrorMessage name="password" /></small></p>
                                 </div>
                             </div>
                             <div>
