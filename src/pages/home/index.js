@@ -7,8 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import get from 'lodash/get';
 import Style from "./style";
 
-function Home(props) {
-    console.log(props);
+function Home() {
     const [popularMovies, setPopularMovies] = useState([]);
     let [topRated, setTopRated] = useState([]);
     let [upComingMovies, setComingMovies] = useState([]);

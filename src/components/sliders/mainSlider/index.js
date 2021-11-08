@@ -39,7 +39,6 @@ function MainSlider(props) {
 
     const imageDefault = (el) => {
         el.target.src = '/images/unkown-poster.jpg';
-        console.log(el.target.src);
     }
     function renderFarm() {
         return (

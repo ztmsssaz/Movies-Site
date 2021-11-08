@@ -1,24 +1,13 @@
-import { postRequest } from '../../api';
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactStars from "react-rating-stars-component";
 import { Style } from "./style";
 
-function RatingMovie(props) {
-    const { movieId } = props;
-
-    function rateMovie(value) {
-        postRequest(`/movie/${movieId}/rating`, { value })
-            .then((res) => {
-                console.log(res);
-            });
-        console.log(value);
-    }
+function RatingMovie() {
     return (
         <Style>
             <ReactStars
                 count={5}
-                onChange={rateMovie}
                 size={20}
                 isHalf={true}
                 emptyIcon={<FontAwesomeIcon icon={faStar} />}

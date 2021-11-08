@@ -29,7 +29,6 @@ function Login() {
     const handleLogin = async (value) => {
         try {
             const response = await loginUser(dispatch, { ...value, 'request_token': requestToken });
-            console.log(response);
             if (!response.success) {
                 setStatusMessage(response.status_message);
                 setTimeout(() => {

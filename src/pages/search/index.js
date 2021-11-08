@@ -56,16 +56,6 @@ function Search() {
         }
     }
 
-    // function setGenresCheckbox(el) {
-    //     let checkbox = el.target;
-    //     console.log(checkbox.checked);
-    //     if (checkbox.checked === true) {
-    //         setWith_genres(`${with_genres}${checkbox.value},`);
-    //     } else {
-    //         setWith_genres(with_genres.replace(`${checkbox.value},`, ''));
-    //     }
-    // }
-
     function renderFilter() {
         return (
             <Fragment>

@@ -33,7 +33,6 @@ function Searching(props) {
 
     function searchHandler(e) {
         const value = e.target.value;
-        console.log(value);
         if (value.length >= 1) {
             setInputValue(e.target.value)
         } else if (value.length === 0) {

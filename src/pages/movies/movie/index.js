@@ -83,7 +83,7 @@ function SeeMovie() {
                                             <div className="mark-movie d-flex justify-content-center rounded-circle px-2">
                                                 <FontAwesomeIcon className="h-100" icon={faHeart} />
                                                 <div className="rating d-flex justify-content-center py-2">
-                                                    <RatingMovie movieId={movieInfo.id} />
+                                                    <RatingMovie />
                                                 </div>
                                             </div>
                                         </div>
