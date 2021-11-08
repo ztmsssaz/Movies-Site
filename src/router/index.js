@@ -14,6 +14,7 @@ const SeeMovie = lazy(() => import("../pages/movies/movie"));
 const TVShows = lazy(() => import("../pages/movies/tv-shows"));
 const UserProfile = lazy(() => import("../pages/user-profile"));
 const Search = lazy(() => import("../pages/search"));
+const Froks = lazy(() => import("../pages/home-forkes"));
 const Categories = lazy(() => import("../pages/categories"));
 const ShowCategory = lazy(() => import("../pages/categories/show-category"));
 
@@ -41,6 +42,9 @@ function MainRouter() {
                         </PublicRoute>
                         <PublicRoute isLogin={isLogin} path="/search" exact>
                             <Search />
+                        </PublicRoute>
+                        <PublicRoute isLogin={isLogin} path="/forks/:name" exact>
+                            <Froks />
                         </PublicRoute>
                         <PublicRoute isLogin={isLogin} path="/categories" exact>
                             <Categories />

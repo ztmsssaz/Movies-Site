@@ -32,8 +32,6 @@ function Header() {
                                 <span>View Profile</span>
                             </Link>
                         </li>
-                        <li><Link to="profile/favorites" className="dropdown-item">Favorites</Link></li>
-                        <li><Link to="ratings" className="dropdown-item border-bottom">Ratings</Link></li>
                         <li><a href="/" onClick={() => logOut(dispatch)} className="dropdown-item">Logout</a></li>
                     </ul>
                 </div>

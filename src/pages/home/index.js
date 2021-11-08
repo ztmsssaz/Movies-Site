@@ -51,21 +51,21 @@ function Home(props) {
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h3 className="py-2 text-capitalize"><b>Top Rated</b></h3>
-                        <Link className="px-2 px-sm-3" to={`/top-rated`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
+                        <Link className="px-2 px-sm-3" to={`/forks/top_rated`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
                     </div>
                     <MiniSlider type={'movie'} data={TOPRATED} />
                 </div>
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h3 className="py-2 text-capitalize"><b>Upcoming</b></h3>
-                        <Link className="px-2 px-sm-3" to={`/upcoming`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
+                        <Link className="px-2 px-sm-3" to={`/forks/upcoming`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
                     </div>
                     <MiniSlider type={'movie'} data={COMINGMOVIES} />
                 </div>
                 <div className="categorySliders px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <h3 className="py-2 text-capitalize"><b>trending</b></h3>
-                        <Link className="px-2 px-sm-3" to={`/trends`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
+                        <Link className="px-2 px-sm-3" to={`/forks/trending`}><span>See More</span> <FontAwesomeIcon icon={faAngleRight} /></Link>
                     </div>
                     <MiniSlider type={'movie'} data={TRENDMOVIES} />
                 </div>

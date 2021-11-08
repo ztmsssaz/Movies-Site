@@ -7,7 +7,7 @@ import Style from "./style";
 import { useEffect } from 'react';
 
 function MoviesList(props) {
-    const { moviesInfo, type } = props;
+    const { moviesInfo, type = "movie" } = props;
 
     useEffect(() => {
 
