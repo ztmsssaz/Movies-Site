@@ -23,7 +23,7 @@ function Search() {
                     setMovies(res.data);
                 })
         }
-        // eslint-disable-next8-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search, page]);
 
     function searchRenderFarm() {
