@@ -24,6 +24,9 @@ function Login() {
                     setRequestToken(response.data.request_token);
                 }
             })
+            .catch(error => {
+                console.log(error);
+            })
     }, [])
 
     const handleLogin = async (value) => {
