@@ -4,11 +4,11 @@ import {
 } from './constant';
 
 // define the api
-const api = create({ baseURL: 'https://api.themoviedb.org/3', params: PARAMS });
+const api = create({ baseURL: 'https://murmuring-tundra-31743.herokuapp.com/movies/3', params: PARAMS });
 
 api.addResponseTransform((response) => {
     if (response.status === 404) {
-        // window.location.href = '/page404';
+        window.location.href = '/page404';
     }
 });
 
