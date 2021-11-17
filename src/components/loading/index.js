@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function Loading(props) {
     const { isLoading, width } = props;
 
@@ -12,4 +14,8 @@ function Loading(props) {
 
     )
 }
+Loading.propTypes = {
+    isLoading: PropTypes.bool.isRequired,
+    width: PropTypes.string,
+};
 export default Loading;

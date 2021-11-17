@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getRequest } from '../../api';
-import { posterBaseUrl } from "../../conctant";
-import { defaultImage } from '../../helpers';
-import MiniSlider from '../../components/sliders/miniSlider';
+import { getRequest } from 'api';
+import { posterBaseUrl } from "constant";
+import { defaultImage } from 'helpers';
+import MiniSlider from 'components/sliders/miniSlider';
 
 import Style from "./style";
 

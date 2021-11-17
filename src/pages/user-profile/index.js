@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useAuthState, logOut, useAuthDispatch } from '../../context';
+import { useAuthState, logOut, useAuthDispatch } from 'context';
 import { useEffect, useRef, useState } from "react";
-import { getRequest } from "../../api";
-import CircleProgressbar from '../../components/circle-gauges';
+import { getRequest } from "api";
+import CircleProgressbar from 'components/circle-gauges';
 import Style from "./style";
-import { profileBaseUrl, gravatarBaseUrl } from '../../conctant'
+import { profileBaseUrl, gravatarBaseUrl } from 'constant'
 
 function UserProfile() {
     const satateInfo = useAuthState();

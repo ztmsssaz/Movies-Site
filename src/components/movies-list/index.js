@@ -1,16 +1,15 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { posterBaseUrl } from '../../conctant';
-import { defaultImage } from '../../helpers';
-import CircleProgressbar from '../../components/circle-gauges';
+import { posterBaseUrl } from 'constant';
+import { defaultImage } from 'helpers';
+import CircleProgressbar from 'components/circle-gauges';
 import PropTypes from 'prop-types';
 import Style from "./style";
-import { useEffect } from 'react';
 
 function MoviesList(props) {
     const { moviesInfo, type = "movie" } = props;
 
     useEffect(() => {
-
     }, [props]);
 
     function renderFarm() {
@@ -20,7 +19,7 @@ function MoviesList(props) {
                 const { vote_average, first_air_date, release_date, media_type, id, poster_path, profile_path, original_name, name, original_title, title, } = item;
                 return (
                     <div key={id} className="movieBox my-2 col-6 col-sm-3 col-lg-2">
-                        <Link className="text-dark shadow-sm bg-white rounded-15 mx-2" to={`/${type || media_type}/${id}`}>
+                        <Link className="text-dark shadow-sm bg-white rounded-15 mx-2" to={`/${media_type || type}/${id}`}>
                             <div className='position-relative'>
                                 <img className='posterPathBackground' src={`${posterBaseUrl}${poster_path || profile_path}`} onError={defaultImage} alt="" />
                                 {vote_average >= 0 && <div className="rateGauge">

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { loginUser, useAuthDispatch } from "../../../context";
+import { loginUser, useAuthDispatch } from "context";
 import { useHistory } from "react-router-dom";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getRequest } from '../../../api';
+import { getRequest } from 'api';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './style.css';

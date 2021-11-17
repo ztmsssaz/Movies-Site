@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom'
-import CircleProgressbar from '../../circle-gauges';
-import { posterBaseUrl } from '../../../conctant';
+import { posterBaseUrl } from 'constant';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import CircleProgressbar from 'components/circle-gauges';
 import PropTypes from 'prop-types';
 import SwiperCore, {
     Navigation, EffectCube,

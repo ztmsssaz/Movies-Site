@@ -2,9 +2,9 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getRequest } from "../../api";
-import { posterBaseUrl } from '../../conctant';
-import { defaultImage, textDots } from '../../helpers';
+import { getRequest } from "api";
+import { posterBaseUrl } from 'constant';
+import { defaultImage, textDots } from 'helpers';
 import PropTypes from 'prop-types';
 import Style from "./style";
 

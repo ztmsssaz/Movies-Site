@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { getRequest } from '../../api';
-import { MiniSlider, MainSlider } from '../../components/sliders';
+import { getRequest } from 'api';
+import { MiniSlider, MainSlider } from 'components/sliders';
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import get from 'lodash/get';

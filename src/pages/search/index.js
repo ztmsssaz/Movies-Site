@@ -1,7 +1,7 @@
 import { useLocation, useHistory } from "react-router-dom";
-import { getRequest } from '../../api';
+import { getRequest } from 'api';
 import { Fragment, useEffect, useState } from "react";
-import MovieList from '../../components/movies-list';
+import MovieList from 'components/movies-list';
 import ReactPaginate from "react-paginate";
 import queryString from 'query-string';
 import Style from "./style";

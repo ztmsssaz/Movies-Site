@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { getRequest } from "../../api";
-import Loading from "../../components/loading";
+import { getRequest } from "api";
+import Loading from "components/loading";
 import Style from "./style";
 
 function Categories() {

@@ -1,22 +1,22 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Switch } from "react-router-dom";
 import { PrivateRoute, PublicRoute } from "./config";
-import { isloggedIn } from '../helpers'
-import Loader from "../components/loader";
-import Layout from '../layout';
+import { isloggedIn } from 'helpers'
+import Loader from "components/loader";
+import Layout from 'layout';
 
-const Login = lazy(() => import("../pages/auth/login"));
-const Page404 = lazy(() => import("../pages/Page404"));
-const Home = lazy(() => import("../pages/home"));
-const AboutUS = lazy(() => import("../pages/about-us"));
-const Person = lazy(() => import("../pages/person"));
-const SeeMovie = lazy(() => import("../pages/movies/movie"));
-const TVShows = lazy(() => import("../pages/movies/tv-shows"));
-const UserProfile = lazy(() => import("../pages/user-profile"));
-const Search = lazy(() => import("../pages/search"));
-const Froks = lazy(() => import("../pages/home-forkes"));
-const Categories = lazy(() => import("../pages/categories"));
-const ShowCategory = lazy(() => import("../pages/categories/show-category"));
+const Login = lazy(() => import("pages/auth/login"));
+const Page404 = lazy(() => import("pages/Page404"));
+const Home = lazy(() => import("pages/home"));
+const AboutUS = lazy(() => import("pages/about-us"));
+const Person = lazy(() => import("pages/person"));
+const SeeMovie = lazy(() => import("pages/movies/movie"));
+const TVShows = lazy(() => import("pages/movies/tv-shows"));
+const UserProfile = lazy(() => import("pages/user-profile"));
+const Search = lazy(() => import("pages/search"));
+const Froks = lazy(() => import("pages/home-forkes"));
+const Categories = lazy(() => import("pages/categories"));
+const ShowCategory = lazy(() => import("pages/categories/show-category"));
 
 function MainRouter() {
     const isLogin = isloggedIn();

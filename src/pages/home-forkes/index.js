@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { getRequest } from '../../api';
-import MovieList from '../../components/movies-list';
-import Loading from "../../components/loading";
+import { getRequest } from 'api';
+import MovieList from 'components/movies-list';
+import Loading from "components/loading";
 import ReactPaginate from "react-paginate";
 import Style from "./style";
 

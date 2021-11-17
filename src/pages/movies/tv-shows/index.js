@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getRequest } from '../../../api';
-import { posterBaseUrl, backgroundMovieBaseUrl, galleryMovieBaseUrl } from "../../../conctant";
-import { toHours, defaultImage } from '../../../helpers';
+import { getRequest } from 'api';
+import { posterBaseUrl, backgroundMovieBaseUrl, galleryMovieBaseUrl } from "constant";
+import { toHours, defaultImage } from 'helpers';
 import { faHeart, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CircleProgressbar from '../../../components/circle-gauges';
-import RatingMovie from '../../../components/rating';
-import MiniSlider from '../../../components/sliders/miniSlider';
-import YoutubeEmbed from '../../../components/youtube-embed';
+import CircleProgressbar from 'components/circle-gauges';
+import RatingMovie from 'components/rating';
+import MiniSlider from 'components/sliders/miniSlider';
+import YoutubeEmbed from 'components/youtube-embed';
 import Style from "../style";
 
 function TVShows() {

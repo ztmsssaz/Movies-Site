@@ -1,11 +1,11 @@
 import { Fragment, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getRequest } from "../../../api";
+import { getRequest } from "api";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Loading from "../../../components/loading";
+import Loading from "components/loading";
 import ReactPaginate from 'react-paginate';
-import MoviesList from '../../../components/movies-list';
+import MoviesList from 'components/movies-list';
 
 function ShowCategory() {
     let [movies, setMovies] = useState({ results: [] });

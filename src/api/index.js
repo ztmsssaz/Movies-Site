@@ -8,7 +8,7 @@ const api = create({ baseURL: 'https://api.themoviedb.org/3', params: PARAMS });
 
 api.addResponseTransform((response) => {
     if (response.status === 404) {
-        window.location.href = '/page404';
+        // window.location.href = '/page404';
     }
 });
 

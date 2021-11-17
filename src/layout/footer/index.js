@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAuthState } from '../../context';
+import { useAuthState } from 'context';
 import { faTwitter, faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Style from "./style";

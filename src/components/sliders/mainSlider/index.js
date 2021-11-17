@@ -1,11 +1,11 @@
 import Style from "./style";
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { posterBaseUrl } from '../../../conctant';
+import { posterBaseUrl } from 'constant';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Loading from '../../loading';
+import Loading from 'components/loading';
 import PropTypes from 'prop-types';
-import CircleProgressbar from '../../circle-gauges'
+import CircleProgressbar from 'components/circle-gauges'
 import SwiperCore, {
     Navigation,
     Pagination,

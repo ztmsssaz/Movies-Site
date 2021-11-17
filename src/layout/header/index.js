@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { NavLink, Link } from "react-router-dom";
-import Searching from '../../components/searching'
-import { useAuthState, logOut, useAuthDispatch } from "../../context";
+import Searching from 'components/searching'
+import { useAuthState, logOut, useAuthDispatch } from "context";
 import Style from "./style";
 
 function Header() {

@@ -1,4 +1,4 @@
-import { postRequest } from '../api';
+import { postRequest } from 'api';
 
 export async function loginUser(dispatch, loginPayLoad) {
     try {

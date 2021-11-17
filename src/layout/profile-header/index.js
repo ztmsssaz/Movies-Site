@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useAuthState } from '../../context';
-import CircleProgressbar from '../../components/circle-gauges';
+import { useAuthState } from 'context';
+import CircleProgressbar from 'components/circle-gauges';
 import Style from "./style";
 
 
